@@ -1,0 +1,199 @@
+﻿@import "tailwindcss";
+@config "../../tailwind.config.cjs";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 222 80% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 20% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 220 20% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 196 90% 48%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 222 80% 55%;
+    --radius: 18px;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 90% 62%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 217 24% 14%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 24% 14%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 196 90% 48%;
+    --accent-foreground: 222 47% 6%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 24% 18%;
+    --input: 217 24% 18%;
+    --ring: 210 90% 62%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    background-image:
+      radial-gradient(circle at top right, rgba(56, 189, 248, 0.15), transparent 42%),
+      radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.18), transparent 45%),
+      radial-gradient(circle at 70% 80%, rgba(99, 102, 241, 0.12), transparent 45%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .container {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-10;
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-semibold tracking-tight text-center;
+  }
+
+  .section-subtitle {
+    @apply mt-2 text-sm md:text-base text-muted-foreground text-center mx-auto max-w-2xl;
+  }
+
+  .glass {
+    @apply bg-background/80 backdrop-blur-xl shadow-glow border border-border/60;
+  }
+
+  .nav-link {
+    @apply relative text-muted-foreground transition-colors hover:text-foreground;
+  }
+
+  .nav-link::after {
+    content: "";
+    @apply absolute -bottom-1 left-0 h-0.5 w-0 rounded-full bg-primary transition-all;
+  }
+
+  .nav-link.is-active {
+    @apply text-foreground;
+  }
+
+  .nav-link.is-active::after {
+    width: 100%;
+  }
+
+  .details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .details-summary {
+    @apply select-none;
+  }
+
+  .details-chevron {
+    transition: transform 0.3s ease;
+  }
+
+  .details[open] .details-chevron {
+    transform: rotate(180deg);
+  }
+
+  .details-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: max-height 0.45s ease, opacity 0.3s ease, transform 0.3s ease;
+    will-change: max-height, opacity, transform;
+  }
+
+  .details[open] .details-content {
+    max-height: 2000px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .role-swap {
+    display: inline-block;
+    animation: roleSwap 0.45s ease;
+    will-change: opacity, transform, filter;
+  }
+
+  html.has-js .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    will-change: opacity, transform;
+  }
+
+  html.has-js .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(120deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  @keyframes roleSwap {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.has-js .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .role-swap {
+      animation: none;
+      filter: none;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+﻿---
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { publications } from "@/data/publications";
+---
+
+<section id="publications" class="section reveal" data-reveal>
+  <div class="container space-y-10">
+    <div>
+      <h2 class="section-title">Publikasi</h2>
+      <p class="section-subtitle">Tulisan dan materi yang pernah dipublikasikan.</p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {publications.map((item) => (
+        <Card className="h-full">
+          <CardHeader>
+            <div class="flex items-center justify-between gap-2">
+              <CardTitle>{item.title}</CardTitle>
+              <Badge variant="outline">{item.year}</Badge>
+            </div>
+            <CardDescription>{item.platform}</CardDescription>
+          </CardHeader>
+          <CardContent class="space-y-3">
+            {item.summary ? (
+              <p class="text-sm text-muted-foreground">{item.summary}</p>
+            ) : null}
+            <a
+              href={item.link}
+              class="inline-flex text-sm font-medium text-primary hover:underline"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Lihat Publikasi
+            </a>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>

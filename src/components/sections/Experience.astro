@@ -1,0 +1,53 @@
+﻿---
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { experiences } from "@/data/experience";
+---
+
+<section id="experience" class="section reveal" data-reveal>
+  <div class="container space-y-10">
+    <div>
+      <h2 class="section-title">Pengalaman Bekerja</h2>
+      <p class="section-subtitle">Peran profesional dan kontribusi utama.</p>
+    </div>
+
+    <div class="space-y-6">
+      {experiences.map((exp) => (
+        <div class="relative pl-6">
+          <div class="absolute left-0 top-7 h-2.5 w-2.5 rounded-full bg-primary"></div>
+          <div class="absolute left-[4px] top-10 h-full w-px bg-border"></div>
+          <Card>
+            <CardHeader>
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 bg-secondary">
+                    <img src={exp.logo} alt={`${exp.company} logo`} class="h-6 w-6" loading="lazy" />
+                  </div>
+                  <CardTitle>{exp.company}</CardTitle>
+                </div>
+                <span class="text-xs text-muted-foreground">{exp.period}</span>
+              </div>
+              <CardDescription>
+                {exp.role} · {exp.employmentType}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p class="text-sm text-muted-foreground">{exp.location}</p>
+              <p class="mt-3 text-sm text-foreground">{exp.summary}</p>
+              <ul class="space-y-2 text-sm text-muted-foreground list-disc pl-4">
+                {exp.highlights.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+              <div class="mt-4 flex flex-wrap gap-2">
+                {exp.tech.map((tech) => (
+                  <Badge variant="outline">{tech}</Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

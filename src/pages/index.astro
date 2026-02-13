@@ -1,17 +1,86 @@
+﻿---
+import "../styles/global.css";
+import Navbar from "@/components/layout/Navbar.astro";
+import Hero from "@/components/sections/Hero.astro";
+import WhatIDo from "@/components/sections/WhatIDo.astro";
+import Projects from "@/components/sections/Projects.astro";
+import Education from "@/components/sections/Education.astro";
+import Trainings from "@/components/sections/Trainings.astro";
+import Experience from "@/components/sections/Experience.astro";
+import Publications from "@/components/sections/Publications.astro";
+import Contact from "@/components/sections/Contact.astro";
+
+const title = "Novanni Indi Pradana | Software Developer & Data Engineer";
+const description =
+  "Portfolio personal Novanni Indi Pradana - Software Developer & Data Engineer di BPS - Statistics Indonesia.";
 ---
 
----
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0f172a" />
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+    <script is:inline>
+      document.documentElement.classList.add("has-js");
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/profile.jpg" />
+  </head>
+  <body>
+    <Navbar />
+    <main>
+      <Hero />
+      <WhatIDo />
+      <Projects />
+      <Education />
+      <Trainings />
+      <Experience />
+      <Publications />
+      <Contact />
+    </main>
+    <footer class="section border-t border-border/60">
+      <div class="container flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground md:flex-row">
+        <p>© 2026 Novanni Indi Pradana. All rights reserved.</p>
+        <p>Built with Astro + Tailwind + shadcn/ui.</p>
+      </div>
+    </footer>
+    <script is:inline>
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const reveals = document.querySelectorAll("[data-reveal]");
+      if (prefersReduced) {
+        reveals.forEach((el) => el.classList.add("is-visible"));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        reveals.forEach((el) => observer.observe(el));
+      }
+    </script>
+  </body>
 </html>

@@ -1,0 +1,38 @@
+﻿---
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { trainings } from "@/data/trainings";
+---
+
+<section id="trainings" class="section reveal" data-reveal>
+  <div class="container space-y-10">
+    <div>
+      <h2 class="section-title">Riwayat Bootcamp/Pelatihan</h2>
+      <p class="section-subtitle">Program intensif yang memperkuat skill praktis.</p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {trainings.map((training) => (
+        <Card className="h-full">
+          <CardHeader className="flex flex-row items-center gap-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-lg border border-border/60 bg-secondary">
+              <img src={training.logo} alt={`${training.provider} logo`} class="h-6 w-6" loading="lazy" />
+            </div>
+            <div>
+              <CardTitle>{training.provider}</CardTitle>
+              <CardDescription>{training.program}</CardDescription>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p class="text-sm font-medium text-foreground">{training.year}</p>
+            <div class="flex flex-wrap gap-2">
+              {training.skills.map((skill) => (
+                <Badge variant="outline">{skill}</Badge>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>

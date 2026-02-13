@@ -1,0 +1,86 @@
+﻿---
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
+const services = [
+  {
+    title: "Web Development",
+    description:
+      "Membangun website cepat, SEO-friendly, dan mudah dirawat dengan fokus pada pengalaman pengguna."
+  },
+  {
+    title: "API / Backend",
+    description:
+      "Merancang layanan backend yang aman, modular, dan siap untuk integrasi lintas aplikasi."
+  },
+  {
+    title: "Data Engineering",
+    description:
+      "Pipeline data yang rapi dari ingestion, transformasi, hingga penyajian ke stakeholder."
+  },
+  {
+    title: "Data Pipeline",
+    description:
+      "Automasi proses ETL/ELT untuk menjaga kualitas dan konsistensi data."
+  },
+  {
+    title: "Dashboarding",
+    description:
+      "Menyusun dashboard metrik yang mudah dipahami untuk pengambilan keputusan cepat."
+  },
+  {
+    title: "Automation",
+    description:
+      "Workflow otomatis untuk laporan rutin, data validation, dan notifikasi."
+  }
+];
+
+const stack = [
+  "Astro",
+  "React",
+  "Tailwind",
+  "Node.js",
+  "Python",
+  "PostgreSQL",
+  "Airflow",
+  "GCP"
+];
+---
+
+<section id="what-i-do" class="section reveal" data-reveal>
+  <div class="container space-y-10">
+    <div>
+      <h2 class="section-title">What I Do?</h2>
+      <p class="section-subtitle">
+        Fokus pada pengembangan software dan data pipeline yang rapi, scalable, dan mudah dipelihara.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {services.map((service) => (
+        <Card className="h-full">
+          <CardHeader>
+            <CardTitle>{service.title}</CardTitle>
+            <CardDescription>{service.description}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="flex flex-wrap gap-2">
+              {stack.slice(0, 3).map((item) => (
+                <Badge variant="outline">{item}</Badge>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+
+    <div class="rounded-2xl border border-border/60 bg-card/70 p-6">
+      <p class="text-sm font-semibold text-muted-foreground">Tech Stack</p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        {stack.map((item) => (
+          <Badge>{item}</Badge>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

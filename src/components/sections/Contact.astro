@@ -1,0 +1,53 @@
+﻿---
+import ContactForm from "@/components/islands/ContactForm";
+import { Separator } from "@/components/ui/separator";
+
+const contacts = [
+  { label: "Email", value: "hello@novanniindipradana.com", href: "mailto:hello@novanniindipradana.com" },
+  { label: "LinkedIn", value: "linkedin.com/in/novanniindipradana", href: "#" },
+  { label: "GitHub", value: "github.com/novanniindipradana", href: "#" },
+  { label: "Instagram", value: "instagram.com/novanniindipradana", href: "#" }
+];
+---
+
+<section id="contact" class="section reveal" data-reveal>
+  <div class="container space-y-10">
+    <div>
+      <h2 class="section-title">Kontak</h2>
+      <p class="section-subtitle">Mari terhubung untuk kolaborasi atau diskusi.</p>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-[1fr_auto_1fr]">
+      <div class="space-y-4">
+        <h3 class="text-xl font-semibold">Info Kontak</h3>
+        <p class="text-sm text-muted-foreground">
+          Gunakan kanal berikut untuk terhubung. Respon biasanya dalam 1-2 hari kerja.
+        </p>
+        <ul class="space-y-3 text-sm">
+          {contacts.map((contact) => (
+            <li class="flex flex-col gap-1">
+              <span class="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                {contact.label}
+              </span>
+              <a href={contact.href} class="font-medium hover:underline">
+                {contact.value}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <Separator className="hidden lg:block" orientation="vertical" />
+
+      <div class="glass rounded-2xl border border-border/60 p-6">
+        <h3 class="text-xl font-semibold">Kirim Pesan</h3>
+        <p class="mt-2 text-sm text-muted-foreground">
+          Isi form berikut dan saya akan membalas secepatnya.
+        </p>
+        <div class="mt-6">
+          <ContactForm client:load />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

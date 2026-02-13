@@ -1,43 +1,41 @@
-# Astro Starter Kit: Minimal
+﻿# Portfolio – Novanni Indi Pradana
+
+Website portfolio personal modern menggunakan Astro + Tailwind + shadcn/ui (React islands).
+
+## Scripts
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
+npm run build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Struktur Utama
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+public/
+  profile.jpg
+  cv.pdf
+  logos/placeholder.svg
+src/
+  components/
+    layout/
+    sections/
+    islands/
+    ui/
+  data/
+  lib/
+  pages/index.astro
+  styles/global.css
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Ganti Foto, CV, dan Sosial
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Foto profil: ganti file `public/profile.jpg`.
+- CV: ganti file `public/cv.pdf`.
+- Link sosial: update di `src/components/sections/Hero.astro` (socials) dan `src/components/layout/Navbar.astro` (socialItems), serta `src/components/sections/Contact.astro`.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Catatan
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Komponen interaktif hanya menggunakan React islands: `ThemeToggle`, `RoleRotator`, `MobileNav`, `ContactForm`.
+- Seluruh data dinamis ada di folder `src/data`.
