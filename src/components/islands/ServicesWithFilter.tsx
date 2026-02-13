@@ -13,13 +13,13 @@ export type Service = {
   title: string;
   description: string;
   tags: string[];
-  category: "Web" | "Backend" | "Data";
+  category: "Web" | "Backend" | "Data" | "Soft Skill";
 };
 
 type Props = {
   services: Service[];
   stack?: string[];
-  initialFilter?: "All" | "Web" | "Backend" | "Data";
+  initialFilter?: "All" | "Web" | "Backend" | "Data" | "Soft Skill";
 };
 
 const FILTERS: Array<Props["initialFilter"]> = [
@@ -27,6 +27,7 @@ const FILTERS: Array<Props["initialFilter"]> = [
   "Web",
   "Backend",
   "Data",
+  "Soft Skill",
 ];
 
 export default function ServicesWithFilter({
@@ -116,11 +117,10 @@ export default function ServicesWithFilter({
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="space-y-1">
               <p className="text-sm font-semibold text-foreground">
-                Tech Stack
+                Keahlian Utama
               </p>
               <p className="text-sm text-muted-foreground">
-                Tools yang paling sering dipakai untuk shipping produk dan
-                pipeline data.
+                Kombinasi tool dan soft skill yang paling sering dipakai.
               </p>
             </div>
 

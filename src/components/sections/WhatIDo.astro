@@ -4,15 +4,21 @@ import type { Service } from "@/components/islands/ServicesWithFilter";
 
 const services: Service[] = [
   {
-    title: "Web Development",
-    description: "Mengembangkan website modern dan responsif dengan PHP/Laravel atau React + Tailwind, terhubung ke MySQL/PostgreSQL.",
-    tags: ["PHP", "Laravel", "React", "Tailwind", "MySQL", "PostgreSQL"],
+    title: "Front-end Development",
+    description: "Membangun antarmuka modern yang responsif dan mudah dipakai.",
+    tags: ["React", "Tailwind", "UI/UX", "Responsive"],
     category: "Web"
   },
   {
-    title: "Data Engineering",
-    description: "Membangun pipeline data untuk eksperimen, analisis, dan pemrosesan yang rapi di notebook maupun produksi.",
-    tags: ["Python", "R", "Google Colab", "ETL/ELT"],
+    title: "Back-end Development",
+    description: "Mengembangkan API dan logika server yang aman serta terhubung ke database.",
+    tags: ["PHP", "Laravel", "MySQL", "PostgreSQL", "REST API"],
+    category: "Backend"
+  },
+  {
+    title: "Dashboard",
+    description: "Menyusun dashboard metrik yang ringkas dan mudah dipahami untuk monitoring.",
+    tags: ["KPI", "Data Viz", "SQL", "Reporting"],
     category: "Data"
   },
   {
@@ -22,10 +28,16 @@ const services: Service[] = [
     category: "Backend"
   },
   {
-    title: "Dashboard",
-    description: "Menyusun dashboard metrik yang ringkas dan mudah dipahami untuk monitoring.",
-    tags: ["KPI", "Data Viz", "SQL", "Reporting"],
+    title: "Data Engineering",
+    description: "Membangun pipeline data untuk eksperimen, analisis, dan pemrosesan yang rapi di notebook maupun produksi.",
+    tags: ["Python", "R", "Google Colab", "ETL/ELT"],
     category: "Data"
+  },
+  {
+    title: "Public Speaking & Problem Solving",
+    description: "Menyampaikan ide dan insight teknis secara jelas serta memecahkan masalah secara terstruktur.",
+    tags: ["Public Speaking", "Problem Solving"],
+    category: "Soft Skill"
   }
 ];
 
@@ -40,11 +52,13 @@ const stack = [
   "R",
   "Google Colab",
   "Selenium",
-  "Playwright"
+  "Playwright",
+  "Public Speaking",
+  "Problem Solving"
 ];
 ---
 
-<section id="what-i-do" class="relative overflow-hidden py-16 md:py-24">
+<section id="keahlian" class="relative overflow-hidden py-16 md:py-24">
   <div aria-hidden="true" class="pointer-events-none absolute inset-0">
     <div class="absolute -top-24 left-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"></div>
     <div class="absolute -bottom-24 right-10 h-72 w-72 rounded-full bg-accent/10 blur-3xl"></div>
@@ -52,9 +66,9 @@ const stack = [
 
   <div class="container relative space-y-10">
     <div class="mx-auto max-w-2xl space-y-3 text-center">
-      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Apa yang Saya Kerjakan</h2>
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Keahlian</h2>
       <p class="text-base leading-relaxed text-muted-foreground md:text-lg">
-        Fokus pada web development, data engineering, automation, dan dashboard yang rapi serta mudah dipelihara.
+        Berfokus pada pengembangan front-end, back-end, data engineering, automation, dan dashboard, dengan komitmen untuk terus belajar dan meningkatkan kualitas solusi.
       </p>
     </div>
 

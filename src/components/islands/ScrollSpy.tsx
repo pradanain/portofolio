@@ -26,8 +26,10 @@ export default function ScrollSpy({ sectionIds, offset = 88 }: ScrollSpyProps) {
         link.classList.toggle("is-active", isActive);
         if (isActive) {
           link.setAttribute("aria-current", "page");
+          link.setAttribute("data-active", "true");
         } else {
           link.removeAttribute("aria-current");
+          link.removeAttribute("data-active");
         }
       });
     };

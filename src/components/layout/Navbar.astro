@@ -5,7 +5,7 @@ import ScrollSpy from "@/components/islands/ScrollSpy";
 
 const navItems = [
   { label: "Beranda", href: "#beranda" },
-  { label: "Apa yang Saya Kerjakan", href: "#what-i-do" },
+  { label: "Keahlian", href: "#keahlian" },
   { label: "Proyek", href: "#projects" },
   { label: "Pendidikan", href: "#education" },
   { label: "Pelatihan", href: "#trainings" },
@@ -24,19 +24,11 @@ const socialItems = [
 ];
 ---
 
-<!-- Skip link (a11y) -->
-<a
-  href="#beranda"
-  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-background focus:px-3 focus:py-2 focus:text-sm focus:shadow"
->
-  Lewati ke konten utama
-</a>
-
 <header class="sticky top-0 z-40 w-full border-b border-border/60 bg-background/75 backdrop-blur-xl">
   <!-- subtle top gradient -->
   <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
 
-  <div class="container flex h-16 items-center justify-between">
+  <div class="container flex h-16 items-center gap-3">
     <!-- Brand -->
     <a
       href="#beranda"
@@ -48,7 +40,7 @@ const socialItems = [
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden items-center gap-1 md:flex" aria-label="Navigasi utama">
+    <nav class="hidden flex-1 items-center justify-center gap-1 lg:flex" aria-label="Navigasi utama">
       {navItems.map((item) => (
         <a
           href={item.href}
@@ -61,10 +53,10 @@ const socialItems = [
     </nav>
 
     <!-- Actions -->
-    <div class="flex items-center gap-2">
+    <div class="ml-auto flex items-center gap-2">
       <ThemeToggle client:load />
 
-      <div class="md:hidden">
+      <div class="lg:hidden">
         <MobileNav
           client:load
           brand="novanniindipradana"
@@ -89,6 +81,7 @@ const socialItems = [
     padding: 0.5rem 0.75rem;
     border-radius: 9999px;
     font-size: 0.875rem;
+    white-space: nowrap;
     color: hsl(var(--muted-foreground));
     transition: background-color 150ms ease, color 150ms ease;
   }
@@ -110,14 +103,6 @@ const socialItems = [
   }
 
   .nav-link[data-active="true"]::after {
-    content: "";
-    position: absolute;
-    left: 14px;
-    right: 14px;
-    bottom: 6px;
-    height: 2px;
-    border-radius: 9999px;
-    background: hsl(var(--primary));
-    opacity: 0.9;
+    content: none;
   }
 </style>
