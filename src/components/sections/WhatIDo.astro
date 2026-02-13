@@ -1,86 +1,64 @@
 ﻿---
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import ServicesWithFilter from "@/components/islands/ServicesWithFilter";
+import type { Service } from "@/components/islands/ServicesWithFilter";
 
-const services = [
+const services: Service[] = [
   {
     title: "Web Development",
-    description:
-      "Membangun website cepat, SEO-friendly, dan mudah dirawat dengan fokus pada pengalaman pengguna."
-  },
-  {
-    title: "API / Backend",
-    description:
-      "Merancang layanan backend yang aman, modular, dan siap untuk integrasi lintas aplikasi."
+    description: "Mengembangkan website modern dan responsif dengan PHP/Laravel atau React + Tailwind, terhubung ke MySQL/PostgreSQL.",
+    tags: ["PHP", "Laravel", "React", "Tailwind", "MySQL", "PostgreSQL"],
+    category: "Web"
   },
   {
     title: "Data Engineering",
-    description:
-      "Pipeline data yang rapi dari ingestion, transformasi, hingga penyajian ke stakeholder."
-  },
-  {
-    title: "Data Pipeline",
-    description:
-      "Automasi proses ETL/ELT untuk menjaga kualitas dan konsistensi data."
-  },
-  {
-    title: "Dashboarding",
-    description:
-      "Menyusun dashboard metrik yang mudah dipahami untuk pengambilan keputusan cepat."
+    description: "Membangun pipeline data untuk eksperimen, analisis, dan pemrosesan yang rapi di notebook maupun produksi.",
+    tags: ["Python", "R", "Google Colab", "ETL/ELT"],
+    category: "Data"
   },
   {
     title: "Automation",
-    description:
-      "Workflow otomatis untuk laporan rutin, data validation, dan notifikasi."
+    description: "Otomatisasi workflow dan pengujian web dengan scripting yang repeatable.",
+    tags: ["Python", "Selenium", "Playwright", "Automation"],
+    category: "Backend"
+  },
+  {
+    title: "Dashboard",
+    description: "Menyusun dashboard metrik yang ringkas dan mudah dipahami untuk monitoring.",
+    tags: ["KPI", "Data Viz", "SQL", "Reporting"],
+    category: "Data"
   }
 ];
 
 const stack = [
-  "Astro",
+  "PHP",
+  "Laravel",
   "React",
   "Tailwind",
-  "Node.js",
-  "Python",
+  "MySQL",
   "PostgreSQL",
-  "Airflow",
-  "GCP"
+  "Python",
+  "R",
+  "Google Colab",
+  "Selenium",
+  "Playwright"
 ];
 ---
 
-<section id="what-i-do" class="section reveal" data-reveal>
-  <div class="container space-y-10">
-    <div>
-      <h2 class="section-title">What I Do?</h2>
-      <p class="section-subtitle">
-        Fokus pada pengembangan software dan data pipeline yang rapi, scalable, dan mudah dipelihara.
+<section id="what-i-do" class="relative overflow-hidden py-16 md:py-24">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div class="absolute -top-24 left-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"></div>
+    <div class="absolute -bottom-24 right-10 h-72 w-72 rounded-full bg-accent/10 blur-3xl"></div>
+  </div>
+
+  <div class="container relative space-y-10">
+    <div class="mx-auto max-w-2xl space-y-3 text-center">
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Apa yang Saya Kerjakan</h2>
+      <p class="text-base leading-relaxed text-muted-foreground md:text-lg">
+        Fokus pada web development, data engineering, automation, dan dashboard yang rapi serta mudah dipelihara.
       </p>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-      {services.map((service) => (
-        <Card className="h-full">
-          <CardHeader>
-            <CardTitle>{service.title}</CardTitle>
-            <CardDescription>{service.description}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="flex flex-wrap gap-2">
-              {stack.slice(0, 3).map((item) => (
-                <Badge variant="outline">{item}</Badge>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-
-    <div class="rounded-2xl border border-border/60 bg-card/70 p-6">
-      <p class="text-sm font-semibold text-muted-foreground">Tech Stack</p>
-      <div class="mt-4 flex flex-wrap gap-2">
-        {stack.map((item) => (
-          <Badge>{item}</Badge>
-        ))}
-      </div>
-    </div>
+    <ServicesWithFilter client:load services={services} stack={stack} initialFilter="All" />
+    <!-- kalau mau lebih hemat, bisa ganti client:load -> client:visible -->
   </div>
 </section>

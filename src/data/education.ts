@@ -4,6 +4,7 @@
   period: string;
   description: string;
   logo: string;
+  url?: string;
 };
 
 export const education: Education[] = [
@@ -12,13 +13,13 @@ export const education: Education[] = [
     program: "MIPA",
     period: "2016 - 2019",
     description: "Fokus pada matematika, sains, dan penguatan dasar analitis.",
-    logo: "/logos/sma1-kendal.svg"
+    logo: "/logos/logo-sman-1-kendal.jpg"
   },
   {
     school: "Politeknik Statistika STIS",
     program: "D-IV Komputasi Statistik",
     period: "2020 - 2024",
     description: "Konsentrasi pada data engineering, statistik terapan, dan pengembangan aplikasi.",
-    logo: "/logos/stis.svg"
+    logo: "/logos/logo-stis.png"
   }
 ];

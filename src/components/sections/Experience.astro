@@ -4,45 +4,99 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { experiences } from "@/data/experience";
 ---
 
-<section id="experience" class="section reveal" data-reveal>
-  <div class="container space-y-10">
-    <div>
-      <h2 class="section-title">Pengalaman Bekerja</h2>
-      <p class="section-subtitle">Peran profesional dan kontribusi utama.</p>
+<section id="experience" class="relative overflow-hidden py-16 md:py-24">
+  <!-- subtle background -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div class="absolute -top-24 left-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"></div>
+    <div class="absolute -bottom-24 right-10 h-72 w-72 rounded-full bg-accent/10 blur-3xl"></div>
+  </div>
+
+  <div class="container relative space-y-10">
+    <div class="mx-auto max-w-2xl space-y-3 text-center">
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">
+        Pengalaman Bekerja
+      </h2>
+      <p class="text-base leading-relaxed text-muted-foreground md:text-lg">
+        Peran profesional dan kontribusi utama.
+      </p>
     </div>
 
+    <!-- Timeline -->
     <div class="space-y-6">
-      {experiences.map((exp) => (
-        <div class="relative pl-6">
-          <div class="absolute left-0 top-7 h-2.5 w-2.5 rounded-full bg-primary"></div>
-          <div class="absolute left-[4px] top-10 h-full w-px bg-border"></div>
-          <Card>
-            <CardHeader>
-              <div class="flex flex-wrap items-center justify-between gap-2">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 bg-secondary">
-                    <img src={exp.logo} alt={`${exp.company} logo`} class="h-6 w-6" loading="lazy" />
+      {experiences.map((exp, idx) => (
+        <div class="relative pl-8">
+          <!-- timeline rail -->
+          <div
+            aria-hidden="true"
+            class="absolute left-3 top-0 bottom-0 w-px bg-border/80"
+          ></div>
+
+          <!-- timeline dot -->
+          <div
+            aria-hidden="true"
+            class="absolute left-2.25 top-8 h-3 w-3 rounded-full bg-primary ring-4 ring-background"
+          ></div>
+
+          <Card className="group border-border/60 bg-card/70 transition hover:-translate-y-0.5 hover:bg-card hover:shadow-sm focus-within:ring-2 focus-within:ring-primary/40">
+            <CardHeader className="space-y-3">
+              <div class="flex flex-wrap items-start justify-between gap-3">
+                <div class="flex min-w-0 items-center gap-3">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-secondary">
+                    <img
+                      src={exp.logo}
+                      alt={`${exp.company} logo`}
+                      class="h-6 w-6"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
-                  <CardTitle>{exp.company}</CardTitle>
+
+                  <div class="min-w-0">
+                    <CardTitle className="truncate">{exp.company}</CardTitle>
+
+                    <CardDescription className="mt-1">
+                      <span class="font-medium text-foreground">{exp.role}</span>
+                      <span class="text-muted-foreground"> · {exp.employmentType}</span>
+                    </CardDescription>
+                  </div>
                 </div>
-                <span class="text-xs text-muted-foreground">{exp.period}</span>
+
+                <Badge variant="secondary" className="shrink-0 rounded-full">
+                  {exp.period}
+                </Badge>
               </div>
-              <CardDescription>
-                {exp.role} · {exp.employmentType}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
+
               <p class="text-sm text-muted-foreground">{exp.location}</p>
-              <p class="mt-3 text-sm text-foreground">{exp.summary}</p>
-              <ul class="space-y-2 text-sm text-muted-foreground list-disc pl-4">
-                {exp.highlights.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-              <div class="mt-4 flex flex-wrap gap-2">
-                {exp.tech.map((tech) => (
-                  <Badge variant="outline">{tech}</Badge>
-                ))}
+            </CardHeader>
+
+            <CardContent className="space-y-4">
+              {exp.summary ? (
+                <p class="text-sm leading-relaxed text-foreground">
+                  {exp.summary}
+                </p>
+              ) : null}
+
+              {exp.highlights?.length ? (
+                <ul class="space-y-2 pl-5 text-sm text-muted-foreground">
+                  {exp.highlights.map((item) => (
+                    <li class="list-disc leading-relaxed">{item}</li>
+                  ))}
+                </ul>
+              ) : null}
+
+              {exp.tech?.length ? (
+                <div class="flex flex-wrap gap-2 pt-1">
+                  {exp.tech.map((tech) => (
+                    <Badge variant="outline" className="rounded-full">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              ) : null}
+
+              <!-- optional index marker (subtle) -->
+              <div class="pt-1 text-xs text-muted-foreground">
+                {String(idx + 1).padStart(2, "0")}
               </div>
             </CardContent>
           </Card>

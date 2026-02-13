@@ -1,33 +1,39 @@
-﻿---
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+---
 import { education } from "@/data/education";
 ---
 
-<section id="education" class="section reveal" data-reveal>
-  <div class="container space-y-10">
-    <div>
-      <h2 class="section-title">Riwayat Pendidikan</h2>
-      <p class="section-subtitle">Perjalanan akademik dan fondasi keilmuan.</p>
+<section id="education" class="py-16 md:py-24">
+  <div class="container">
+    <div class="mx-auto mb-16 max-w-3xl text-center">
+      <h2 class="mb-4 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
+        Riwayat Pendidikan
+      </h2>
+
     </div>
 
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-      {education.map((item) => (
-        <Card className="h-full">
-          <CardHeader className="flex flex-row items-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg border border-border/60 bg-secondary">
-              <img src={item.logo} alt={`${item.school} logo`} class="h-6 w-6" loading="lazy" />
-            </div>
-            <div>
-              <CardTitle>{item.school}</CardTitle>
-              <CardDescription>{item.program}</CardDescription>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <p class="text-sm font-medium text-foreground">{item.period}</p>
-            <p class="text-sm text-muted-foreground">{item.description}</p>
-          </CardContent>
-        </Card>
-      ))}
+    <div class="flex flex-wrap items-center justify-center">
+      {education.map((item) => {
+        const Tag = item.url ? "a" : "div";
+        const attrs = item.url
+          ? { href: item.url, target: "_blank", rel: "noreferrer noopener" }
+          : {};
+
+        return (
+          <Tag
+            {...attrs}
+            class="max-w-30 mx-4 py-4 transition duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:mx-6 xl:mx-8"
+            title={item.school}
+          >
+            <img
+              src={item.logo}
+              alt={item.school}
+              class="h-auto w-full"
+              loading="lazy"
+              decoding="async"
+            />
+          </Tag>
+        );
+      })}
     </div>
   </div>
 </section>

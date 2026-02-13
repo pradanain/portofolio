@@ -26,7 +26,7 @@ export const experiences: Experience[] = [
       "Kolaborasi dengan K/L dan pemda untuk memastikan diseminasi data yang akurat dan terkoordinasi."
     ],
     tech: ["Data Engineering", "Public Speaking", "IT Support", "Sectoral Statistics"],
-    logo: "/logos/bps.svg"
+    logo: "/logos/logo-bps.png"
   },
   {
     company: "iClass",
@@ -42,7 +42,7 @@ export const experiences: Experience[] = [
       "Menjaga kualitas kode dan membantu dukungan pengguna terkait isu teknis."
     ],
     tech: ["Laravel", "Tailwind CSS", "Full-stack"],
-    logo: "/logos/iclass.svg"
+    logo: "/logos/logo-iclass.png"
   },
   {
     company: "Pilih Jurusan",
@@ -60,6 +60,6 @@ export const experiences: Experience[] = [
       "Mengoptimalkan script agar lebih stabil, efisien, dan mudah dirawat."
     ],
     tech: ["Selenium", "Python", "Automation Testing"],
-    logo: "/logos/pilih-jurusan.svg"
+    logo: "/logos/logo-pilih-jurusan.png"
   }
 ];

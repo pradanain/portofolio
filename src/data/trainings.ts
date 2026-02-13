@@ -4,6 +4,7 @@
   year: string;
   skills: string[];
   logo: string;
+  url?: string;
 };
 
 export const trainings: Training[] = [
@@ -12,20 +13,20 @@ export const trainings: Training[] = [
     program: "Web Development Bootcamp",
     year: "2020",
     skills: ["Frontend", "Team Collaboration", "UI Fundamentals"],
-    logo: "/logos/dsc-itb.svg"
+    logo: "/logos/logo-gdsc-itb.png"
   },
   {
     provider: "Dicoding",
     program: "Belajar Membangun Aplikasi Web",
     year: "2021",
     skills: ["JavaScript", "REST API", "Deployment"],
-    logo: "/logos/dicoding.svg"
+    logo: "/logos/logo-dicoding.png"
   },
   {
     provider: "Laskar AI",
     program: "Data Engineering Track",
     year: "2022",
     skills: ["ETL", "Data Modeling", "Cloud Basics"],
-    logo: "/logos/laskar-ai.svg"
+    logo: "/logos/logo-laskar-ai.png"
   }
 ];

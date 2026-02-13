@@ -5,8 +5,8 @@ import ScrollSpy from "@/components/islands/ScrollSpy";
 
 const navItems = [
   { label: "Beranda", href: "#beranda" },
-  { label: "What I Do", href: "#what-i-do" },
-  { label: "Projects", href: "#projects" },
+  { label: "Apa yang Saya Kerjakan", href: "#what-i-do" },
+  { label: "Proyek", href: "#projects" },
   { label: "Pendidikan", href: "#education" },
   { label: "Pelatihan", href: "#trainings" },
   { label: "Pengalaman", href: "#experience" },
@@ -18,19 +18,37 @@ const sectionIds = navItems.map((item) => item.href.replace("#", ""));
 
 const socialItems = [
   { label: "Email", href: "mailto:hello@novanniindipradana.com" },
-  { label: "LinkedIn", href: "#" },
-  { label: "GitHub", href: "#" },
-  { label: "Instagram", href: "#" }
+  { label: "LinkedIn", href: "#", external: true },
+  { label: "GitHub", href: "#", external: true },
+  { label: "Instagram", href: "#", external: true }
 ];
 ---
 
-<header class="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl">
+<!-- Skip link (a11y) -->
+<a
+  href="#beranda"
+  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-background focus:px-3 focus:py-2 focus:text-sm focus:shadow"
+>
+  Lewati ke konten utama
+</a>
+
+<header class="sticky top-0 z-40 w-full border-b border-border/60 bg-background/75 backdrop-blur-xl">
+  <!-- subtle top gradient -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
+
   <div class="container flex h-16 items-center justify-between">
-    <a href="#beranda" class="text-sm font-semibold tracking-[0.2em] uppercase">
-      novanniindipradana
+    <!-- Brand -->
+    <a
+      href="#beranda"
+      class="group inline-flex items-center gap-2 rounded-lg px-2 py-1 text-sm font-semibold tracking-[0.2em] uppercase text-foreground transition hover:bg-secondary/60 focus:outline-none focus:ring-2 focus:ring-primary/40"
+      aria-label="Kembali ke Beranda"
+    >
+      <span class="hidden sm:inline">novanniindipradana</span>
+      <span class="sm:hidden">nip</span>
     </a>
 
-    <nav class="hidden items-center gap-6 text-sm font-medium md:flex">
+    <!-- Desktop nav -->
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Navigasi utama">
       {navItems.map((item) => (
         <a
           href={item.href}
@@ -42,12 +60,64 @@ const socialItems = [
       ))}
     </nav>
 
-    <div class="flex items-center gap-3">
+    <!-- Actions -->
+    <div class="flex items-center gap-2">
       <ThemeToggle client:load />
+
       <div class="md:hidden">
-        <MobileNav client:load brand="novanniindipradana" items={navItems} socials={socialItems} />
+        <MobileNav
+          client:load
+          brand="novanniindipradana"
+          items={navItems}
+          socials={socialItems}
+        />
       </div>
     </div>
   </div>
+
+  <!-- ScrollSpy island: set active state -->
   <ScrollSpy client:load sectionIds={sectionIds} />
 </header>
+
+<style>
+  /* Desktop nav link styling */
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .nav-link:hover {
+    background: hsl(var(--secondary) / 0.6);
+    color: hsl(var(--foreground));
+  }
+
+  .nav-link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.35);
+  }
+
+  /* Active state — sesuaikan dengan output ScrollSpy kamu */
+  .nav-link[data-active="true"] {
+    color: hsl(var(--foreground));
+    background: hsl(var(--secondary) / 0.8);
+  }
+
+  .nav-link[data-active="true"]::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 6px;
+    height: 2px;
+    border-radius: 9999px;
+    background: hsl(var(--primary));
+    opacity: 0.9;
+  }
+</style>

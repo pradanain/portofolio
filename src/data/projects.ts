@@ -6,6 +6,7 @@ export type Project = {
   category: ProjectCategory;
   stack: string[];
   logo: string;
+  image?: string;
   demoUrl?: string;
   repoUrl?: string;
   featured?: boolean;

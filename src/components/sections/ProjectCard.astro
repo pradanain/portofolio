@@ -1,0 +1,102 @@
+---
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import type { Project } from "@/data/projects";
+
+interface Props {
+  project: Project;
+  featured?: boolean;
+}
+
+const { project, featured = false } = Astro.props;
+---
+
+<Card
+  className={[
+    "group h-full overflow-hidden border-border/60 bg-card/70 transition",
+    "hover:-translate-y-0.5 hover:bg-card hover:shadow-sm",
+    "focus-within:ring-2 focus-within:ring-primary/40",
+    featured ? "border-primary/30" : ""
+  ].join(" ")}
+>
+  <!-- Header -->
+  <CardHeader className="space-y-3">
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex items-start gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 bg-secondary">
+          <img
+            src={project.logo}
+            alt={`${project.title} logo`}
+            class="h-6 w-6"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <div class="space-y-1">
+          <CardTitle className="leading-snug">{project.title}</CardTitle>
+          <CardDescription className="leading-relaxed">
+            {project.description}
+          </CardDescription>
+        </div>
+      </div>
+
+      <Badge variant={featured ? "default" : "outline"} className={featured ? "" : "rounded-full"}>
+        {project.category}
+      </Badge>
+    </div>
+  </CardHeader>
+
+  <!-- Content -->
+  <CardContent className="space-y-4">
+    <!-- Optional: thumbnail / preview area if you have it -->
+    {project.image ? (
+      <div class="relative overflow-hidden rounded-xl border border-border/60 bg-secondary/40">
+        <img
+          src={project.image}
+          alt={`Preview ${project.title}`}
+          class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    ) : null}
+
+    <div class="flex flex-wrap gap-2">
+      {project.stack?.map((item) => (
+        <Badge variant="outline" className="rounded-full">
+          {item}
+        </Badge>
+      ))}
+    </div>
+  </CardContent>
+
+  <!-- Footer (CTA) -->
+  {project.repoUrl ? (
+    <CardFooter className="mt-auto flex justify-center">
+      <a
+        href={project.repoUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Buka GitHub ${project.title}`}
+        class="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
+      >
+        <span>GitHub</span>
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 20 20"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M5 10h10M11 6l4 4-4 4"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </CardFooter>
+  ) : null}
+</Card>
