@@ -9,7 +9,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetDescription,
-  SheetTrigger
+  SheetTrigger,
 } from "@/components/ui/sheet";
 import {
   DropdownMenu,
@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 
@@ -47,9 +47,10 @@ export default function MobileNav({ brand, items, socials }: MobileNavProps) {
       </SheetTrigger>
       <SheetContent side="right" className="flex flex-col gap-6">
         <SheetHeader>
-          <SheetTitle className="text-left">{brand}</SheetTitle>
-          <SheetDescription>Menu navigasi cepat</SheetDescription>
+          <SheetTitle className="text-center">{brand}</SheetTitle>
         </SheetHeader>
+
+        <Separator />
 
         <nav className="flex flex-col gap-3 text-sm font-medium">
           {items.map((item) => (
@@ -65,30 +66,6 @@ export default function MobileNav({ brand, items, socials }: MobileNavProps) {
         </nav>
 
         <Separator />
-
-        <div className="space-y-3">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Social
-          </p>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="w-full">
-                Akses Sosial
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuLabel>Terhubung</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {socials.map((item) => (
-                <DropdownMenuItem key={item.href} asChild>
-                  <a href={item.href} target="_blank" rel="noreferrer">
-                    {item.label}
-                  </a>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
       </SheetContent>
     </Sheet>
   );

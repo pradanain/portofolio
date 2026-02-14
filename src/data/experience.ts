@@ -18,15 +18,20 @@ export const experiences: Experience[] = [
     period: "Des 2024 - Saat ini",
     location: "Bulungan, Kalimantan Utara, Indonesia · Di lokasi",
     summary:
-      "Diangkat sebagai PNS per 1 Desember 2024 (ikatan dinas 4 tahun Politeknik Statistika STIS) dan bergabung dalam tim IPDS (Integration of Processing and Disseminating Statistics).",
+      "Diangkat sebagai CPNS per 1 Desember 2024 (PNS per 1 Desember 2025) dan bergabung dalam tim IPDS (Integrasi Pengolahan dan Diseminasi Statistik).",
     highlights: [
       "Menjaga dan mendukung infrastruktur TI kantor.",
       "Menyusun dan mempublikasikan laporan statistik berbasis data yang telah diproses.",
       "Memberikan asistensi teknis dan pendampingan Statistik Sektoral kepada stakeholder eksternal.",
-      "Kolaborasi dengan K/L dan pemda untuk memastikan diseminasi data yang akurat dan terkoordinasi."
+      "Kolaborasi dengan K/L dan pemda untuk memastikan diseminasi data yang akurat dan terkoordinasi.",
     ],
-    tech: ["Data Engineering", "Public Speaking", "IT Support", "Sectoral Statistics"],
-    logo: "/logos/logo-bps.png"
+    tech: [
+      "Data Engineering",
+      "Public Speaking",
+      "IT Support",
+      "Sectoral Statistics",
+    ],
+    logo: "/logos/logo-bps.png",
   },
   {
     company: "iClass",
@@ -39,10 +44,10 @@ export const experiences: Experience[] = [
     highlights: [
       "Mengembangkan fitur frontend dan backend menggunakan Laravel dan Tailwind CSS.",
       "Memperbaiki bug dan meningkatkan performa untuk pengalaman belajar yang lebih stabil.",
-      "Menjaga kualitas kode dan membantu dukungan pengguna terkait isu teknis."
+      "Menjaga kualitas kode dan membantu dukungan pengguna terkait isu teknis.",
     ],
     tech: ["Laravel", "Tailwind CSS", "Full-stack"],
-    logo: "/logos/logo-iclass.png"
+    logo: "/logos/logo-iclass.png",
   },
   {
     company: "Pilih Jurusan",
@@ -54,12 +59,11 @@ export const experiences: Experience[] = [
       "Fokus pada otomasi pengujian untuk memastikan fitur website pilihjurusan.id berjalan stabil dan sesuai alur pengguna.",
     highlights: [
       "Menyusun skenario dan test case berdasarkan flow pengguna.",
-      "Membangun script pengujian otomatis menggunakan Selenium + Python.",
-      "Menjalankan regression test untuk fitur baru serta memantau hasil eksekusi.",
-      "Mendokumentasikan bug dan berkolaborasi dengan tim dev untuk perbaikan.",
-      "Mengoptimalkan script agar lebih stabil, efisien, dan mudah dirawat."
+      "Membangun script pengujian otomatis menggunakan Selenium Python.",
+      "Mendokumentasikan bug dan berkolaborasi dengan tim pengembang untuk perbaikan.",
+      "Mengoptimalkan script agar lebih stabil dan efisien.",
     ],
     tech: ["Selenium", "Python", "Automation Testing"],
-    logo: "/logos/logo-pilih-jurusan.png"
-  }
+    logo: "/logos/logo-pilih-jurusan.png",
+  },
 ];
