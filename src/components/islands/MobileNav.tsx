@@ -8,17 +8,8 @@ import {
   SheetClose,
   SheetHeader,
   SheetTitle,
-  SheetDescription,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 
 export type NavItem = {
@@ -29,6 +20,7 @@ export type NavItem = {
 export type SocialItem = {
   label: string;
   href: string;
+  external?: boolean;
 };
 
 type MobileNavProps = {

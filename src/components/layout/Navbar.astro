@@ -6,30 +6,29 @@ import ScrollSpy from "@/components/islands/ScrollSpy";
 const navItems = [
   { label: "Beranda", href: "#beranda" },
   { label: "Keahlian", href: "#keahlian" },
-  { label: "Proyek", href: "#projects" },
-  { label: "Pendidikan", href: "#education" },
-  { label: "Pelatihan", href: "#trainings" },
-  { label: "Pengalaman", href: "#experience" },
-  { label: "Publikasi & Paten", href: "#publications" },
-  { label: "Kontak", href: "#contact" }
+  { label: "Proyek", href: "#proyek" },
+  { label: "Pengalaman", href: "#pengalaman" },
+  { label: "Organisasi", href: "#organisasi" },
+  { label: "Pendidikan", href: "#pendidikan" },
+  { label: "Pelatihan", href: "#pelatihan" },
+  { label: "Publikasi & Paten", href: "#publikasi-paten" },
+  { label: "Kontak", href: "#kontak" }
 ];
 
 const sectionIds = navItems.map((item) => item.href.replace("#", ""));
 
 const socialItems = [
-  { label: "Email", href: "mailto:hello@novanniindipradana.com" },
-  { label: "LinkedIn", href: "#", external: true },
-  { label: "GitHub", href: "#", external: true },
-  { label: "Instagram", href: "#", external: true }
+  { label: "Email", href: "mailto:novanindipradana@gmail.com" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/novanniindipradana", external: true },
+  { label: "GitHub", href: "https://github.com/pradanain", external: true },
+  { label: "Instagram", href: "https://instagram.com/pradanawae", external: true }
 ];
 ---
 
 <header class="sticky top-0 z-40 w-full border-b border-border/60 bg-background/75 backdrop-blur-xl">
-  <!-- subtle top gradient -->
   <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
 
   <div class="container flex h-16 items-center gap-3">
-    <!-- Brand -->
     <a
       href="#beranda"
       class="group inline-flex items-center gap-2 rounded-lg px-2 py-1 text-sm font-semibold tracking-[0.2em] uppercase text-foreground transition hover:bg-secondary/60 focus:outline-none focus:ring-2 focus:ring-primary/40"
@@ -39,7 +38,6 @@ const socialItems = [
       <span class="sm:hidden">nip</span>
     </a>
 
-    <!-- Desktop nav -->
     <nav class="hidden flex-1 items-center justify-center gap-1 lg:flex" aria-label="Navigasi utama">
       {navItems.map((item) => (
         <a
@@ -52,13 +50,12 @@ const socialItems = [
       ))}
     </nav>
 
-    <!-- Actions -->
     <div class="ml-auto flex items-center gap-2">
-      <ThemeToggle client:load />
+      <ThemeToggle client:idle />
 
       <div class="lg:hidden">
         <MobileNav
-          client:load
+          client:idle
           brand="novanniindipradana"
           items={navItems}
           socials={socialItems}
@@ -67,12 +64,10 @@ const socialItems = [
     </div>
   </div>
 
-  <!-- ScrollSpy island: set active state -->
-  <ScrollSpy client:load sectionIds={sectionIds} />
+  <ScrollSpy client:idle sectionIds={sectionIds} />
 </header>
 
 <style>
-  /* Desktop nav link styling */
   .nav-link {
     position: relative;
     display: inline-flex;
@@ -96,7 +91,6 @@ const socialItems = [
     box-shadow: 0 0 0 2px hsl(var(--primary) / 0.35);
   }
 
-  /* Active state — sesuaikan dengan output ScrollSpy kamu */
   .nav-link[data-active="true"] {
     color: hsl(var(--foreground));
     background: hsl(var(--secondary) / 0.8);

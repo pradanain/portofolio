@@ -21,7 +21,6 @@ const remainingStack = project.stack ? project.stack.length - visibleStack.lengt
     "focus-within:ring-2 focus-within:ring-primary/40"
   ].join(" ")}
 >
-  <!-- Header -->
   <CardHeader className="space-y-3">
     <div class="min-w-0 space-y-1">
       <CardTitle className="text-center leading-snug">
@@ -33,9 +32,7 @@ const remainingStack = project.stack ? project.stack.length - visibleStack.lengt
     </div>
   </CardHeader>
 
-  <!-- Content -->
   <CardContent className="space-y-4">
-    <!-- Optional: thumbnail / preview area if you have it -->
     {project.image ? (
       <div class="relative overflow-hidden rounded-xl border border-border/60 bg-secondary/40">
         <img
@@ -69,7 +66,6 @@ const remainingStack = project.stack ? project.stack.length - visibleStack.lengt
     </div>
   </CardContent>
 
-  <!-- Footer (CTA) -->
   {project.repoUrl || project.demoUrl ? (
     <CardFooter className="mt-auto flex flex-wrap justify-center gap-2">
       {project.demoUrl ? (

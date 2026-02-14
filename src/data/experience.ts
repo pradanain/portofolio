@@ -1,4 +1,6 @@
-﻿export type Experience = {
+﻿import { withBase } from "@/lib/withBase";
+
+export type Experience = {
   company: string;
   role: string;
   employmentType: string;
@@ -31,7 +33,7 @@ export const experiences: Experience[] = [
       "IT Support",
       "Sectoral Statistics",
     ],
-    logo: "/logos/logo-bps.png",
+    logo: withBase("logos/logo-bps.png"),
   },
   {
     company: "iClass",
@@ -47,7 +49,7 @@ export const experiences: Experience[] = [
       "Menjaga kualitas kode dan membantu dukungan pengguna terkait isu teknis.",
     ],
     tech: ["Laravel", "Tailwind CSS", "Full-stack"],
-    logo: "/logos/logo-iclass.png",
+    logo: withBase("logos/logo-iclass.png"),
   },
   {
     company: "Pilih Jurusan",
@@ -64,6 +66,6 @@ export const experiences: Experience[] = [
       "Mengoptimalkan script agar lebih stabil dan efisien.",
     ],
     tech: ["Selenium", "Python", "Automation Testing"],
-    logo: "/logos/logo-pilih-jurusan.png",
+    logo: withBase("logos/logo-pilih-jurusan.png"),
   },
 ];

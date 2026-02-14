@@ -58,8 +58,8 @@ const stack = [
 ];
 ---
 
-<section id="keahlian" class="relative overflow-hidden py-16 md:py-24">
-  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+<section id="keahlian" class="section">
+  <div aria-hidden="true" class="section-bg">
     <div class="absolute -top-24 left-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"></div>
     <div class="absolute -bottom-24 right-10 h-72 w-72 rounded-full bg-accent/10 blur-3xl"></div>
   </div>
@@ -72,7 +72,6 @@ const stack = [
       </p>
     </div>
 
-    <ServicesWithFilter client:load services={services} stack={stack} initialFilter="All" />
-    <!-- kalau mau lebih hemat, bisa ganti client:load -> client:visible -->
+    <ServicesWithFilter client:visible services={services} stack={stack} initialFilter="All" />
   </div>
 </section>

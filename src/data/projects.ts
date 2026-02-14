@@ -1,4 +1,6 @@
-﻿export type ProjectCategory = "Web" | "Data" | "Automation" | "Mobile";
+﻿import { withBase } from "@/lib/withBase";
+
+export type ProjectCategory = "Web" | "Data" | "Automation" | "Mobile";
 
 export type Project = {
   title: string;
@@ -22,7 +24,7 @@ export const featuredProjects: Project[] = [
       "Mengurangi input manual dengan otomatisasi berbasis Excel dan logging terpusat.",
     category: "Automation",
     stack: ["Playwright", "Python", "Excel", "PyQt5", "QFluentWidgets"],
-    logo: "/logos/gc.svg",
+    logo: withBase("logos/gc.svg"),
     repoUrl: "https://github.com/bpskabbulungan/otomatisasidirgc-6502",
     featured: true,
   },
@@ -34,7 +36,7 @@ export const featuredProjects: Project[] = [
       "Kontrol bot presensi dan jadwal otomatis dalam satu dashboard terpusat.",
     category: "Automation",
     stack: ["Web Dashboard", "WhatsApp Bot", "Scheduling"],
-    logo: "/logos/sigap.svg",
+    logo: withBase("logos/sigap.svg"),
     repoUrl: "https://github.com/bpskabbulungan/sigap-6502",
     featured: true,
   },
@@ -46,7 +48,7 @@ export const featuredProjects: Project[] = [
       "Merapikan tracking rekomendasi dengan dokumentasi terpusat dan akses terkontrol.",
     category: "Web",
     stack: ["Information System", "Workflow", "Audit Follow-up"],
-    logo: "/logos/tl-bpk.svg",
+    logo: withBase("logos/tl-bpk.svg"),
     repoUrl: "https://github.com/pradanain/tl-bpk-bps",
     featured: true,
   },
@@ -57,7 +59,7 @@ export const featuredProjects: Project[] = [
     impact: "Mengelola perubahan TI end-to-end sesuai arahan PAN-RB.",
     category: "Web",
     stack: ["Information System", "SPBE", "Documentation"],
-    logo: "/logos/spbe.svg",
+    logo: withBase("logos/spbe.svg"),
     repoUrl: "https://github.com/pradanain/spbe-bps",
     featured: true,
   },
@@ -72,7 +74,7 @@ export const projects: Project[] = [
       "Mempercepat verifikasi dan pelaporan pengawasan SPMB dalam satu platform terpusat.",
     category: "Web",
     stack: ["Java", "Spring Boot"],
-    logo: "/logos/spmb.svg",
+    logo: withBase("logos/spmb.svg"),
     repoUrl: "https://github.com/pradanain/SPMB-STIS-Java-SpringBoot",
   },
   {
@@ -83,7 +85,7 @@ export const projects: Project[] = [
       "Mempermudah akses informasi kegiatan dan mendorong partisipasi mahasiswa.",
     category: "Mobile",
     stack: ["Android App", "Student Activities"],
-    logo: "/logos/sigma.svg",
+    logo: withBase("logos/sigma.svg"),
     repoUrl: "https://github.com/pradanain/SIGMA-STIS-AndroidApp",
   },
 ];

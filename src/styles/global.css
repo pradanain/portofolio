@@ -70,6 +70,7 @@
     font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
   }
 
+
   img {
     display: block;
     max-width: 100%;
@@ -78,7 +79,49 @@
 
 @layer components {
   .section {
-    @apply py-16 md:py-24;
+    @apply relative overflow-hidden py-16 md:py-24;
+    isolation: isolate;
+  }
+
+  .section::before,
+  .section::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 6rem;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .section::before {
+    top: 0;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--background) / 0.9) 0%,
+      hsl(var(--background) / 0.55) 45%,
+      transparent 100%
+    );
+  }
+
+  .section::after {
+    bottom: 0;
+    background: linear-gradient(
+      0deg,
+      hsl(var(--background) / 0.9) 0%,
+      hsl(var(--background) / 0.55) 45%,
+      transparent 100%
+    );
+  }
+
+  .section-bg {
+    @apply pointer-events-none absolute inset-0;
+    z-index: 0;
+  }
+
+  .section > .container {
+    position: relative;
+    z-index: 2;
   }
 
   .container {

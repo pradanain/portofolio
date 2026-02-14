@@ -1,22 +1,35 @@
 ﻿---
+import { getImage } from "astro:assets";
 import "../styles/global.css";
 import Navbar from "@/components/layout/Navbar.astro";
 import Hero from "@/components/sections/Hero.astro";
 import WhatIDo from "@/components/sections/WhatIDo.astro";
 import Projects from "@/components/sections/Projects.astro";
+import Experience from "@/components/sections/Experience.astro";
+import Organizations from "@/components/sections/Organizations.astro";
 import Education from "@/components/sections/Education.astro";
 import Trainings from "@/components/sections/Trainings.astro";
-import Experience from "@/components/sections/Experience.astro";
 import Publications from "@/components/sections/Publications.astro";
 import Contact from "@/components/sections/Contact.astro";
+import profileImage from "@/assets/profile.webp";
+import { withBase } from "@/lib/withBase";
 
 const title = "Novanni Indi Pradana | Software Developer & Data Engineer";
 const description =
   "Portfolio personal Novanni Indi Pradana - Software Developer & Data Engineer di BPS - Statistics Indonesia.";
 
-// Ganti sesuai domain kamu (penting untuk SEO).
-const siteUrl = "https://novanniindipradana.com";
-const ogImage = "/profile.jpg";
+const site = Astro.site ?? new URL("https://novanniindipradana.com");
+const basePath = import.meta.env.BASE_URL ?? "/";
+const siteUrl = site.origin;
+const canonicalUrl = new URL(basePath, site).href;
+const ogImage = await getImage({
+  src: profileImage,
+  width: 1200,
+  quality: 92,
+  format: "jpeg"
+});
+const ogImageUrl = new URL(ogImage.src, site).href;
+const iconHref = withBase("logo.png");
 ---
 
 <!doctype html>
@@ -25,26 +38,34 @@ const ogImage = "/profile.jpg";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const theme = stored === "light" || stored === "dark" ? stored : (systemDark ? "dark" : "light");
+          const root = document.documentElement;
+          root.classList.toggle("dark", theme === "dark");
+          root.setAttribute("data-theme", theme);
+        } catch {}
+      })();
+    </script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- SEO basics -->
-    <link rel="canonical" href={siteUrl} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="robots" content="index, follow" />
 
-    <!-- Theme color (support light/dark if you toggle themes) -->
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 
-    <!-- JS hint -->
     <script is:inline>
       document.documentElement.classList.add("has-js");
     </script>
 
-    <!-- Icons -->
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" type="image/png" href={iconHref} />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -52,44 +73,39 @@ const ogImage = "/profile.jpg";
       rel="stylesheet"
     />
 
-    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={siteUrl} />
-    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- JSON-LD (Person) -->
     <script type="application/ld+json" is:inline>
       {JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Person",
         name: "Novanni Indi Pradana",
         url: siteUrl,
-        image: `${siteUrl}${ogImage}`,
+        image: ogImageUrl,
         jobTitle: "Software Developer & Data Engineer",
         worksFor: {
           "@type": "Organization",
           name: "BPS - Statistics Indonesia"
         },
         sameAs: [
-          // isi bila sudah punya:
-          // "https://www.linkedin.com/in/novanniindipradana",
-          // "https://github.com/novanniindipradana",
-          // "https://instagram.com/novanniindipradana"
+          "https://www.linkedin.com/in/novanniindipradana",
+          "https://github.com/pradanain",
+          "https://instagram.com/pradanawae"
         ]
       })}
     </script>
   </head>
 
   <body class="min-h-screen bg-background text-foreground antialiased">
-    <!-- Skip to content -->
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-background focus:px-3 focus:py-2 focus:text-sm focus:shadow"
@@ -103,9 +119,10 @@ const ogImage = "/profile.jpg";
       <Hero />
       <WhatIDo />
       <Projects />
+      <Experience />
+      <Organizations />
       <Education />
       <Trainings />
-      <Experience />
       <Publications />
       <Contact />
     </main>
@@ -119,12 +136,10 @@ const ogImage = "/profile.jpg";
 </footer>
 
 
-    <!-- Reveal animation (progressive enhancement) -->
     <script is:inline>
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const reveals = document.querySelectorAll("[data-reveal]");
 
-      // If user prefers reduced motion, show everything immediately.
       if (prefersReduced) {
         reveals.forEach((el) => el.classList.add("is-visible"));
       } else if ("IntersectionObserver" in window) {
@@ -142,7 +157,6 @@ const ogImage = "/profile.jpg";
 
         reveals.forEach((el) => observer.observe(el));
       } else {
-        // Fallback for older browsers
         reveals.forEach((el) => el.classList.add("is-visible"));
       }
     </script>

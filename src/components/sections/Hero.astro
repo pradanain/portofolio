@@ -1,23 +1,24 @@
 ﻿---
+import { Image } from "astro:assets";
 import { Badge } from "@/components/ui/badge";
 import RoleRotator from "@/components/islands/RoleRotator";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import profileImage from "@/assets/profile.webp";
+import { withBase } from "@/lib/withBase";
 
 const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Speaker"];
 ---
 
-<section id="beranda" class="relative overflow-hidden py-16 md:py-24" aria-label="Hero">
-  <!-- Background accents -->
-  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-    <div class="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl"></div>
-    <div class="absolute -bottom-28 right-10 h-72 w-72 rounded-full bg-accent/20 blur-3xl"></div>
-    <div class="absolute inset-0 bg-linear-to-b from-background via-background/80 to-background"></div>
+<section id="beranda" class="section" aria-label="Hero">
+  <div aria-hidden="true" class="section-bg">
+    <div class="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/20 blur-2xl"></div>
+    <div class="absolute -bottom-28 right-10 h-72 w-72 rounded-full bg-accent/20 blur-2xl"></div>
+    <div class="absolute inset-0 bg-linear-to-b from-background via-background/70 to-transparent"></div>
   </div>
 
   <div class="container relative">
     <div class="grid items-center gap-12 md:grid-cols-[1.15fr_0.85fr]">
-      <!-- Left -->
       <div class="space-y-8 md:space-y-10">
         <div class="flex flex-wrap items-center gap-3">
           <Badge variant="outline" className="w-fit">Available for collaboration</Badge>
@@ -42,14 +43,12 @@ const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Spea
         </header>
 
         <div class="pt-1">
-          <RoleRotator client:load roles={roles} />
+          <RoleRotator client:idle roles={roles} />
         </div>
 
-        <!-- CTA -->
         <div class="flex flex-wrap items-center gap-3 pt-2">
-          <!-- Primary CTA: strong contrast -->
           <a
-            href="#contact"
+            href="#kontak"
             aria-label="Hubungi saya"
             class={cn(
               buttonVariants({ size: "lg" }),
@@ -60,7 +59,7 @@ const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Spea
           </a>
 
           <a
-            href="/cv.pdf"
+            href={withBase("cv_novanniindipradana.pdf")}
             download
             aria-label="Unduh CV"
             class={cn(
@@ -70,31 +69,26 @@ const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Spea
           >
             Unduh CV
           </a>
-
-          <div class="flex items-center gap-2 text-sm text-muted-foreground">
-            <span class="hidden sm:inline">atau</span>
-            <a href="#projects" class="underline underline-offset-4 hover:text-foreground">
-              Lihat proyek
-            </a>
-          </div>
         </div>
       </div>
 
-      <!-- Right -->
       <div class="relative mx-auto w-full max-w-sm">
         <div
           aria-hidden="true"
-          class="absolute -inset-4 rounded-4xl bg-linear-to-br from-primary/20 via-transparent to-accent/20 blur-2xl"
+          class="absolute -inset-4 rounded-4xl bg-linear-to-br from-primary/20 via-transparent to-accent/20 blur-xl"
         ></div>
 
         <div class="relative overflow-hidden rounded-[28px] border border-border/60 bg-card p-4 shadow-sm text-center">
           <figure class="space-y-4">
-            <img
-              src="/profile.jpg"
+            <Image
+              src={profileImage}
               alt="Foto Novanni Indi Pradana"
-              class="h-105 w-full rounded-2xl object-cover"
-              loading="lazy"
-              decoding="async"
+              class="h-[26.25rem] w-full rounded-2xl object-cover"
+              width={768}
+              quality={92}
+              format="webp"
+              loading="eager"
+              decoding="sync"
               fetchpriority="high"
             />
 
@@ -107,7 +101,7 @@ const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Spea
           </figure>
         </div>
 
-        <div class="pointer-events-none absolute -bottom-4 left-1/2 w-[92%] -translate-x-1/2 rounded-2xl border border-border/60 bg-background/80 p-3 text-xs text-muted-foreground shadow-sm backdrop-blur text-center">
+        <div class="pointer-events-none absolute -bottom-4 left-1/2 w-[92%] -translate-x-1/2 rounded-2xl border border-border/60 bg-background/80 p-3 text-xs text-muted-foreground shadow-sm backdrop-blur-sm text-center">
           <span class="text-foreground">Open to:</span> freelance • contract
         </div>
       </div>

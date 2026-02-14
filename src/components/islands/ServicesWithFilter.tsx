@@ -43,7 +43,6 @@ export default function ServicesWithFilter({
 
   return (
     <div className="space-y-8">
-      {/* Filter chips */}
       <div className="flex flex-wrap items-center gap-2">
         {FILTERS.map((f) => {
           const isActive = f === active;
@@ -67,7 +66,6 @@ export default function ServicesWithFilter({
         </span>
       </div>
 
-      {/* Services grid */}
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {filtered.map((service, idx) => (
           <Card
@@ -107,7 +105,6 @@ export default function ServicesWithFilter({
         ))}
       </div>
 
-      {/* Tech Stack (optional) */}
       {stack.length > 0 && (
         <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card/70 p-6">
           <div
