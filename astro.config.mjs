@@ -15,8 +15,36 @@ const isUserPage =
   repo.toLowerCase() === `${owner}.github.io`.toLowerCase();
 const envSite = process.env.SITE_URL || process.env.PUBLIC_SITE_URL;
 const envBase = process.env.BASE_PATH || process.env.PUBLIC_BASE_PATH;
-const site = envSite ?? (isGithubPages ? `https://${owner}.github.io` : 'https://novanniindipradana.com');
-const base = envBase ?? (isGithubPages && repo && !isUserPage ? `/${repo}` : '/');
+
+const normalizeSite = (value) => {
+  if (!value) return undefined;
+  const trimmed = value.trim();
+  if (!trimmed) return undefined;
+  try {
+    return new URL(trimmed).toString().replace(/\/$/, '');
+  } catch {
+    try {
+      return new URL(`https://${trimmed}`).toString().replace(/\/$/, '');
+    } catch {
+      return undefined;
+    }
+  }
+};
+
+const normalizeBase = (value) => {
+  if (!value) return undefined;
+  const trimmed = value.trim();
+  if (!trimmed) return undefined;
+  const withSlash = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+  return withSlash.endsWith('/') ? withSlash : `${withSlash}/`;
+};
+
+const site =
+  normalizeSite(envSite) ??
+  (isGithubPages ? `https://${owner}.github.io` : 'https://novanniindipradana.com');
+const base =
+  normalizeBase(envBase) ??
+  (isGithubPages && repo && !isUserPage ? `/${repo}/` : '/');
 
 export default defineConfig({
   site,
