@@ -59,7 +59,7 @@ export default function RoleRotator({
                 <Tooltip key={social.href}>
                   <TooltipTrigger asChild>
                     <Button asChild variant="secondary" size="icon" aria-label={social.label}>
-                      <a href={social.href} target="_blank" rel="noreferrer">
+                      <a href={social.href} target="_blank" rel="noopener noreferrer">
                         <Icon className="h-4 w-4" />
                       </a>
                     </Button>

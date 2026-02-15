@@ -72,7 +72,7 @@ const remainingStack = project.stack ? project.stack.length - visibleStack.lengt
         <a
           href={project.demoUrl}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           aria-label={`Buka demo ${project.title}`}
           class={cn(
             buttonVariants({ size: "sm", variant: "outline" }),
@@ -87,7 +87,7 @@ const remainingStack = project.stack ? project.stack.length - visibleStack.lengt
         <a
           href={project.repoUrl}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           aria-label={`Buka GitHub ${project.title}`}
           class={cn(buttonVariants({ size: "sm" }), "rounded-full")}
         >

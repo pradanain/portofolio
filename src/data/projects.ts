@@ -25,6 +25,7 @@ export const featuredProjects: Project[] = [
     category: "Automation",
     stack: ["Playwright", "Python", "Excel", "PyQt5", "QFluentWidgets"],
     logo: withBase("logos/gc.svg"),
+    image: withBase("screenshots/dirgc-gui.jpg"),
     repoUrl: "https://github.com/bpskabbulungan/otomatisasidirgc-6502",
     featured: true,
   },
@@ -37,6 +38,7 @@ export const featuredProjects: Project[] = [
     category: "Automation",
     stack: ["Web Dashboard", "WhatsApp Bot", "Scheduling"],
     logo: withBase("logos/sigap.svg"),
+    image: withBase("screenshots/sigap-6502.jpg"),
     repoUrl: "https://github.com/bpskabbulungan/sigap-6502",
     featured: true,
   },
@@ -47,8 +49,9 @@ export const featuredProjects: Project[] = [
     impact:
       "Merapikan tracking rekomendasi dengan dokumentasi terpusat dan akses terkontrol.",
     category: "Web",
-    stack: ["Information System", "Workflow", "Audit Follow-up"],
+    stack: ["Information System", "Workflow", "Audit", "Laravel"],
     logo: withBase("logos/tl-bpk.svg"),
+    image: withBase("screenshots/tl-bpk.jpg"),
     repoUrl: "https://github.com/pradanain/tl-bpk-bps",
     featured: true,
   },
@@ -58,8 +61,9 @@ export const featuredProjects: Project[] = [
       "Sistem informasi terpadu untuk perencanaan, pengajuan, pengelolaan, dan evaluasi kegiatan SPBE sesuai arahan perubahan Kementerian PAN-RB, lengkap dengan dokumentasi terpusat dan kolaborasi tim.",
     impact: "Mengelola perubahan TI end-to-end sesuai arahan PAN-RB.",
     category: "Web",
-    stack: ["Information System", "SPBE", "Documentation"],
+    stack: ["Information System", "SPBE", "Documentation", "Laravel"],
     logo: withBase("logos/spbe.svg"),
+    image: withBase("screenshots/spbe-bps.jpg"),
     repoUrl: "https://github.com/pradanain/spbe-bps",
     featured: true,
   },
@@ -67,25 +71,27 @@ export const featuredProjects: Project[] = [
 
 export const projects: Project[] = [
   {
-    title: "SPMB STIS - Java Spring Boot",
+    title: "SPMB STIS - Seleksi Penerimaan Mahasiswa Baru",
     description:
       "Aplikasi web pendukung SPMB STIS (hybrid) untuk verifikasi peserta, absensi, unggah laporan pengawas, serta monitoring panitia lewat pencarian dan unduh laporan.",
     impact:
       "Mempercepat verifikasi dan pelaporan pengawasan SPMB dalam satu platform terpusat.",
     category: "Web",
-    stack: ["Java", "Spring Boot"],
+    stack: ["Java", "Spring Boot", "Web", "Entrance Exam"],
     logo: withBase("logos/spmb.svg"),
+    image: withBase("screenshots/spmb-stis.jpg"),
     repoUrl: "https://github.com/pradanain/SPMB-STIS-Java-SpringBoot",
   },
   {
-    title: "SIGMA STIS - Android App",
+    title: "SIGMA STIS - Sistem Informasi Kegiatan Mahasiswa",
     description:
       "Aplikasi informasi kegiatan mahasiswa Politeknik Statistika STIS, mencakup kegiatan internal dan eksternal untuk meningkatkan partisipasi.",
     impact:
       "Mempermudah akses informasi kegiatan dan mendorong partisipasi mahasiswa.",
     category: "Mobile",
-    stack: ["Android App", "Student Activities"],
+    stack: ["Java", "Android", "Student Activities"],
     logo: withBase("logos/sigma.svg"),
+    image: withBase("screenshots/sigma-stis.jpg"),
     repoUrl: "https://github.com/pradanain/SIGMA-STIS-AndroidApp",
   },
 ];

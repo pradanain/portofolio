@@ -78,7 +78,7 @@ const contacts = [
           href={c.href}
           class="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 text-primary transition hover:border-primary hover:bg-primary hover:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
           target={c.external ? "_blank" : undefined}
-          rel={c.external ? "noreferrer" : undefined}
+          rel={c.external ? "noopener noreferrer" : undefined}
           aria-label={c.label}
           title={c.label}
         >

@@ -53,9 +53,15 @@ const iconHref = withBase("logo.png");
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Novanni Indi Pradana" />
 
     <link rel="canonical" href={canonicalUrl} />
     <meta name="robots" content="index, follow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'"
+    />
 
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -78,11 +84,16 @@ const iconHref = withBase("logo.png");
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content="Foto Novanni Indi Pradana" />
+    <meta property="og:site_name" content="Novanni Indi Pradana" />
+    <meta property="og:locale" content="id_ID" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:site" content="@pradanawae" />
+    <meta name="twitter:creator" content="@pradanawae" />
 
     <script type="application/ld+json" is:inline>
       {JSON.stringify({
@@ -101,6 +112,20 @@ const iconHref = withBase("logo.png");
           "https://github.com/pradanain",
           "https://instagram.com/pradanawae"
         ]
+      })}
+    </script>
+    <script type="application/ld+json" is:inline>
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Novanni Indi Pradana",
+        url: siteUrl,
+        description,
+        inLanguage: "id-ID",
+        publisher: {
+          "@type": "Person",
+          name: "Novanni Indi Pradana"
+        }
       })}
     </script>
   </head>
@@ -136,29 +161,5 @@ const iconHref = withBase("logo.png");
 </footer>
 
 
-    <script is:inline>
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const reveals = document.querySelectorAll("[data-reveal]");
-
-      if (prefersReduced) {
-        reveals.forEach((el) => el.classList.add("is-visible"));
-      } else if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver(
-          (entries, obs) => {
-            for (const entry of entries) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-                obs.unobserve(entry.target);
-              }
-            }
-          },
-          { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
-        );
-
-        reveals.forEach((el) => observer.observe(el));
-      } else {
-        reveals.forEach((el) => el.classList.add("is-visible"));
-      }
-    </script>
   </body>
 </html>

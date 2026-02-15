@@ -13,8 +13,15 @@ const isUserPage =
   !!repo &&
   !!owner &&
   repo.toLowerCase() === `${owner}.github.io`.toLowerCase();
-const site = isGithubPages ? `https://${owner}.github.io` : 'https://novanniindipradana.com';
-const base = isGithubPages && repo && !isUserPage ? `/${repo}` : '/';
+const envSite = process.env.SITE_URL || process.env.PUBLIC_SITE_URL;
+const envBase = process.env.BASE_PATH || process.env.PUBLIC_BASE_PATH;
+if (isGithubPages && !envSite) {
+  throw new Error(
+    "SITE_URL (or PUBLIC_SITE_URL) must be set for GitHub Pages builds to keep canonical URLs correct."
+  );
+}
+const site = envSite ?? (isGithubPages ? `https://${owner}.github.io` : 'https://novanniindipradana.com');
+const base = envBase ?? (isGithubPages && repo && !isUserPage ? `/${repo}` : '/');
 
 export default defineConfig({
   site,
