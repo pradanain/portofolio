@@ -1,13 +1,7 @@
 ---
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { organizations } from "@/data/organizations";
-import { cn } from "@/lib/utils";
-
-const visibleCount = 3;
-const visibleOrgs = organizations.slice(0, visibleCount);
-const hiddenOrgs = organizations.slice(visibleCount);
 ---
 
 <section id="organisasi" class="section">
@@ -27,7 +21,7 @@ const hiddenOrgs = organizations.slice(visibleCount);
     </div>
 
     <div class="space-y-6">
-      {visibleOrgs.map((org, idx) => {
+      {organizations.map((org, idx) => {
         const index = idx + 1;
 
         return (
@@ -107,115 +101,5 @@ const hiddenOrgs = organizations.slice(visibleCount);
         );
       })}
     </div>
-
-    {hiddenOrgs.length ? (
-      <details class="details mt-4">
-        <summary
-          class={cn(
-            "details-summary mx-auto w-fit",
-            buttonVariants({ size: "sm", variant: "outline" }),
-            "flex rounded-full border-primary/40 hover:border-primary hover:bg-primary/10"
-          )}
-        >
-          <span>Lihat lebih banyak</span>
-          <svg
-            class="details-chevron h-4 w-4"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.25a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </summary>
-
-        <div class="details-content pt-6">
-          <div class="space-y-6">
-            {hiddenOrgs.map((org, idx) => {
-              const index = idx + visibleCount + 1;
-
-              return (
-                <div class="relative pl-8">
-                  <div
-                    aria-hidden="true"
-                    class="absolute left-3 top-0 bottom-0 w-px bg-border/80"
-                  ></div>
-
-                  <div
-                    aria-hidden="true"
-                    class="absolute left-2.25 top-8 h-3 w-3 rounded-full bg-primary ring-4 ring-background"
-                  ></div>
-
-                  <Card className="group border-border/60 bg-card/70 transition hover:-translate-y-0.5 hover:bg-card hover:shadow-sm focus-within:ring-2 focus-within:ring-primary/40">
-                    <CardHeader className="space-y-3">
-                      <div class="flex flex-wrap items-start justify-between gap-3">
-                        <div class="flex min-w-0 items-center gap-3">
-                          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-secondary">
-                            <img
-                              src={org.logo}
-                              alt={`${org.organization} logo`}
-                              class="h-6 w-6"
-                              loading="lazy"
-                              decoding="async"
-                            />
-                          </div>
-
-                          <div class="min-w-0">
-                            <CardTitle className="truncate">{org.organization}</CardTitle>
-
-                            <CardDescription className="mt-1">
-                              <span class="font-medium text-foreground">{org.role}</span>
-                            </CardDescription>
-                          </div>
-                        </div>
-
-                        <Badge variant="secondary" className="shrink-0 rounded-full">
-                          {org.period}
-                        </Badge>
-                      </div>
-
-                      <p class="text-sm text-muted-foreground">{org.location}</p>
-                    </CardHeader>
-
-                    <CardContent className="space-y-4">
-                      {org.summary ? (
-                        <p class="text-sm leading-relaxed text-foreground">
-                          {org.summary}
-                        </p>
-                      ) : null}
-
-                      {org.highlights?.length ? (
-                        <ul class="space-y-2 pl-5 text-sm text-muted-foreground">
-                          {org.highlights.map((item) => (
-                            <li class="list-disc leading-relaxed">{item}</li>
-                          ))}
-                        </ul>
-                      ) : null}
-
-                      {org.skills?.length ? (
-                        <div class="flex flex-wrap gap-2 pt-1">
-                          {org.skills.map((skill) => (
-                            <Badge variant="outline" className="rounded-full">
-                              {skill}
-                            </Badge>
-                          ))}
-                        </div>
-                      ) : null}
-
-                      <div class="pt-1 text-xs text-muted-foreground">
-                        {String(index).padStart(2, "0")}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </details>
-    ) : null}
   </div>
 </section>
