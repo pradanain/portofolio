@@ -23,7 +23,7 @@ export const featuredProjects: Project[] = [
     impact:
       "Mengurangi input manual dengan otomatisasi berbasis Excel dan logging terpusat.",
     category: "Automation",
-    stack: ["Playwright", "Python", "Excel", "PyQt5", "QFluentWidgets"],
+    stack: ["BPS", "Playwright", "Python", "Excel", "PyQt5", "QFluentWidgets"],
     logo: withBase("logos/gc.svg"),
     image: withBase("screenshots/dirgc-gui.jpg"),
     repoUrl: "https://github.com/bpskabbulungan/otomatisasidirgc-6502",
@@ -36,7 +36,7 @@ export const featuredProjects: Project[] = [
     impact:
       "Kontrol bot presensi dan jadwal otomatis dalam satu dashboard terpusat.",
     category: "Automation",
-    stack: ["Web Dashboard", "WhatsApp Bot", "Scheduling"],
+    stack: ["BPS", "Web Dashboard", "WhatsApp Bot", "Scheduling"],
     logo: withBase("logos/sigap.svg"),
     image: withBase("screenshots/sigap-6502.jpg"),
     repoUrl: "https://github.com/bpskabbulungan/sigap-6502",
@@ -49,7 +49,7 @@ export const featuredProjects: Project[] = [
     impact:
       "Merapikan tracking rekomendasi dengan dokumentasi terpusat dan akses terkontrol.",
     category: "Web",
-    stack: ["Information System", "Workflow", "Audit", "Laravel"],
+    stack: ["BPS", "BPK", "Information System", "Workflow", "Audit", "Laravel"],
     logo: withBase("logos/tl-bpk.svg"),
     image: withBase("screenshots/tl-bpk.jpg"),
     repoUrl: "https://github.com/pradanain/tl-bpk-bps",
@@ -61,7 +61,7 @@ export const featuredProjects: Project[] = [
       "Sistem informasi terpadu untuk perencanaan, pengajuan, pengelolaan, dan evaluasi kegiatan SPBE sesuai arahan perubahan Kementerian PAN-RB, lengkap dengan dokumentasi terpusat dan kolaborasi tim.",
     impact: "Mengelola perubahan TI end-to-end sesuai arahan PAN-RB.",
     category: "Web",
-    stack: ["Information System", "SPBE", "Documentation", "Laravel"],
+    stack: ["BPS", "Information System", "SPBE", "Documentation", "Laravel"],
     logo: withBase("logos/spbe.svg"),
     image: withBase("screenshots/spbe-bps.jpg"),
     repoUrl: "https://github.com/pradanain/spbe-bps",
@@ -77,7 +77,7 @@ export const projects: Project[] = [
     impact:
       "Mempercepat verifikasi dan pelaporan pengawasan SPMB dalam satu platform terpusat.",
     category: "Web",
-    stack: ["Java", "Spring Boot", "Web", "Entrance Exam"],
+    stack: ["STIS", "Java", "Spring Boot", "Web", "Entrance Exam"],
     logo: withBase("logos/spmb.svg"),
     image: withBase("screenshots/spmb-stis.jpg"),
     repoUrl: "https://github.com/pradanain/SPMB-STIS-Java-SpringBoot",
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     impact:
       "Mempermudah akses informasi kegiatan dan mendorong partisipasi mahasiswa.",
     category: "Mobile",
-    stack: ["Java", "Android", "Student Activities"],
+    stack: ["STIS", "Java", "Android", "Student Activities"],
     logo: withBase("logos/sigma.svg"),
     image: withBase("screenshots/sigma-stis.jpg"),
     repoUrl: "https://github.com/pradanain/SIGMA-STIS-AndroidApp",
