@@ -1,7 +1,9 @@
 ---
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { organizations } from "@/data/organizations";
+import { cn } from "@/lib/utils";
 
 const visibleCount = 3;
 const visibleOrgs = organizations.slice(0, visibleCount);
@@ -108,7 +110,13 @@ const hiddenOrgs = organizations.slice(visibleCount);
 
     {hiddenOrgs.length ? (
       <details class="details mt-4">
-        <summary class="details-summary mx-auto flex w-fit items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-4 py-2 text-sm font-medium text-foreground transition hover:bg-secondary">
+        <summary
+          class={cn(
+            "details-summary mx-auto w-fit",
+            buttonVariants({ size: "sm", variant: "outline" }),
+            "flex rounded-full border-primary/40 hover:border-primary hover:bg-primary/10"
+          )}
+        >
           <span>Lihat lebih banyak</span>
           <svg
             class="details-chevron h-4 w-4"

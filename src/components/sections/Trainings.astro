@@ -1,7 +1,9 @@
 ---
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { trainings } from "@/data/trainings";
+import { cn } from "@/lib/utils";
 ---
 
 <section id="pelatihan" class="section">
@@ -61,7 +63,7 @@ import { trainings } from "@/data/trainings";
                 href={training.url}
                 target="_blank"
                 rel="noreferrer noopener"
-                class="text-sm font-medium text-primary underline underline-offset-4"
+                class={cn(buttonVariants({ size: "sm", variant: "outline" }), "rounded-full")}
               >
                 Lihat Sertifikat
               </a>

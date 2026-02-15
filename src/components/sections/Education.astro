@@ -1,7 +1,9 @@
 ---
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { education } from "@/data/education";
+import { cn } from "@/lib/utils";
 ---
 
 <section id="pendidikan" class="section">
@@ -64,7 +66,7 @@ import { education } from "@/data/education";
                 href={item.url}
                 target="_blank"
                 rel="noreferrer noopener"
-                class="text-sm font-medium text-primary underline underline-offset-4"
+                class={cn(buttonVariants({ size: "sm", variant: "outline" }), "rounded-full")}
               >
                 Lihat Detail
               </a>
