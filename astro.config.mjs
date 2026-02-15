@@ -39,9 +39,13 @@ const normalizeBase = (value) => {
   return withSlash.endsWith('/') ? withSlash : `${withSlash}/`;
 };
 
-const site =
-  normalizeSite(envSite) ??
-  (isGithubPages ? `https://${owner}.github.io` : 'https://novanniindipradana.com');
+const fallbackSite = isGithubPages
+  ? repo && !isUserPage
+    ? `https://${owner}.github.io/${repo}`
+    : `https://${owner}.github.io`
+  : 'https://pradanain.github.io/portofolio';
+
+const site = normalizeSite(envSite) ?? fallbackSite;
 const base =
   normalizeBase(envBase) ??
   (isGithubPages && repo && !isUserPage ? `/${repo}/` : '/');
