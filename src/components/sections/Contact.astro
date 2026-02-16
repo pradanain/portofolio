@@ -81,6 +81,9 @@ const contacts = [
           rel={c.external ? "noopener noreferrer" : undefined}
           aria-label={c.label}
           title={c.label}
+          data-ga-event="contact_click"
+          data-ga-location="contact_section"
+          data-ga-channel={c.label.toLowerCase()}
         >
           <span class="sr-only">{c.label}</span>
           <Fragment set:html={c.svg} />

@@ -51,6 +51,14 @@ const iconHref = withBase("logo.png");
       })();
     </script>
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DM214RN0X6"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-DM214RN0X6");
+    </script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Novanni Indi Pradana" />
@@ -60,7 +68,7 @@ const iconHref = withBase("logo.png");
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'"
+      content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'"
     />
 
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
@@ -159,6 +167,39 @@ const iconHref = withBase("logo.png");
     </p>
   </div>
 </footer>
+
+    <script is:inline>
+      (() => {
+        const getTarget = (node) =>
+          node instanceof Element ? node.closest("[data-ga-event]") : null;
+
+        document.addEventListener("click", (event) => {
+          const target = getTarget(event.target);
+          if (!target) return;
+          const eventName = target.getAttribute("data-ga-event");
+          if (!eventName || typeof window.gtag !== "function") return;
+
+          const params = {};
+          const channel = target.getAttribute("data-ga-channel");
+          const location = target.getAttribute("data-ga-location");
+          const projectName = target.getAttribute("data-ga-project");
+          const type = target.getAttribute("data-ga-type");
+          const fileName = target.getAttribute("data-ga-file");
+
+          if (channel) params.channel = channel;
+          if (location) params.location = location;
+          if (projectName) params.project_name = projectName;
+          if (type) params.type = type;
+          if (fileName) params.file_name = fileName;
+
+          if (target instanceof HTMLAnchorElement && target.href) {
+            params.link_url = target.href;
+          }
+
+          window.gtag("event", eventName, params);
+        });
+      })();
+    </script>
 
 
   </body>

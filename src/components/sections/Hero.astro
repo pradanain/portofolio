@@ -50,6 +50,8 @@ const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Spea
           <a
             href="#kontak"
             aria-label="Hubungi saya"
+            data-ga-event="cta_contact_click"
+            data-ga-location="hero"
             class={cn(
               buttonVariants({ size: "lg" }),
               "rounded-full bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-primary/40"
@@ -62,6 +64,9 @@ const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Spea
             href={withBase("cv_novanniindipradana.pdf")}
             download
             aria-label="Unduh CV"
+            data-ga-event="cv_download"
+            data-ga-location="hero"
+            data-ga-file="cv_novanniindipradana.pdf"
             class={cn(
               buttonVariants({ size: "lg", variant: "outline" }),
               "rounded-full border-primary/40 text-foreground hover:border-primary hover:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary/40"
