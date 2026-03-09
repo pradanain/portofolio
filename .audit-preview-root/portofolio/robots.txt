@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pradanain.github.io/portofolio/sitemap-index.xml

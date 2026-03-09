@@ -1,11 +1,16 @@
-﻿import { withBase } from "@/lib/withBase";
+import type { ImageMetadata } from "astro";
+
+import logoDicoding from "@/assets/logos/logo-dicoding.webp";
+import logoLaskarAi from "@/assets/logos/logo-laskar-ai.webp";
+import logoGdsc from "@/assets/logos/logo-gdsc-itb.webp";
+import logoCfds from "@/assets/logos/logo-cfds-progate.webp";
 
 export type Training = {
   provider: string;
   program: string;
   year: string;
   skills: string[];
-  logo: string;
+  logo: ImageMetadata;
   url?: string;
 };
 
@@ -15,7 +20,7 @@ export const trainings: Training[] = [
     program: "Learning Path Dicoding",
     year: "2022 - Sekarang",
     skills: ["Frontend", "Backend", "Data Science", "Machine Learning"],
-    logo: withBase("logos/logo-dicoding.jpg"),
+    logo: logoDicoding
   },
   {
     provider: "Laskar AI",
@@ -26,22 +31,22 @@ export const trainings: Training[] = [
       "Data Science",
       "Python",
       "AI Engineering",
-      "Data Visualization",
+      "Data Visualization"
     ],
-    logo: withBase("logos/logo-laskar-ai.jpg"),
+    logo: logoLaskarAi
   },
   {
     provider: "Google Developer Student Club (GDSC) ITB",
     program: "GDSC Institut Teknologi Bandung Bootcamp",
     year: "2021",
     skills: ["GIT", "Android", "Data Science"],
-    logo: withBase("logos/logo-gdsc-itb.png"),
+    logo: logoGdsc
   },
   {
     provider: "Center for Digital Society (CfDS) UGM",
     program: "CfDS Universitas Gajah Mada x Progate Bootcamp",
     year: "2020",
     skills: ["Programming Fundamentals", "HTML", "CSS", "JavaScript"],
-    logo: withBase("logos/logo-cfds-progate.jpg"),
-  },
+    logo: logoCfds
+  }
 ];

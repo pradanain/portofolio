@@ -1,4 +1,8 @@
-﻿import { withBase } from "@/lib/withBase";
+import type { ImageMetadata } from "astro";
+
+import logoBps from "@/assets/logos/logo-bps.webp";
+import logoIclass from "@/assets/logos/logo-iclass.webp";
+import logoPilihJurusan from "@/assets/logos/logo-pilih-jurusan.webp";
 
 export type Experience = {
   company: string;
@@ -9,7 +13,7 @@ export type Experience = {
   summary: string;
   highlights: string[];
   tech: string[];
-  logo: string;
+  logo: ImageMetadata;
 };
 
 export const experiences: Experience[] = [
@@ -25,15 +29,15 @@ export const experiences: Experience[] = [
       "Menjaga dan mendukung infrastruktur TI kantor.",
       "Menyusun dan mempublikasikan laporan statistik berbasis data yang telah diproses.",
       "Memberikan asistensi teknis dan pendampingan Statistik Sektoral kepada stakeholder eksternal.",
-      "Kolaborasi dengan K/L dan pemda untuk memastikan diseminasi data yang akurat dan terkoordinasi.",
+      "Kolaborasi dengan K/L dan pemda untuk memastikan diseminasi data yang akurat dan terkoordinasi."
     ],
     tech: [
       "Data Engineering",
       "Public Speaking",
       "IT Support",
-      "Sectoral Statistics",
+      "Sectoral Statistics"
     ],
-    logo: withBase("logos/logo-bps.png"),
+    logo: logoBps
   },
   {
     company: "iClass",
@@ -46,10 +50,10 @@ export const experiences: Experience[] = [
     highlights: [
       "Mengembangkan fitur frontend dan backend menggunakan Laravel dan Tailwind CSS.",
       "Memperbaiki bug dan meningkatkan performa untuk pengalaman belajar yang lebih stabil.",
-      "Menjaga kualitas kode dan membantu dukungan pengguna terkait isu teknis.",
+      "Menjaga kualitas kode dan membantu dukungan pengguna terkait isu teknis."
     ],
     tech: ["Laravel", "Tailwind CSS", "Full-stack"],
-    logo: withBase("logos/logo-iclass.png"),
+    logo: logoIclass
   },
   {
     company: "Pilih Jurusan",
@@ -63,9 +67,9 @@ export const experiences: Experience[] = [
       "Menyusun skenario dan test case berdasarkan flow pengguna.",
       "Membangun script pengujian otomatis menggunakan Selenium Python.",
       "Mendokumentasikan bug dan berkolaborasi dengan tim pengembang untuk perbaikan.",
-      "Mengoptimalkan script agar lebih stabil dan efisien.",
+      "Mengoptimalkan script agar lebih stabil dan efisien."
     ],
     tech: ["Selenium", "Python", "Automation Testing"],
-    logo: withBase("logos/logo-pilih-jurusan.png"),
-  },
+    logo: logoPilihJurusan
+  }
 ];

@@ -1,0 +1,21 @@
+---
+interface Props {
+  roles: string[];
+  interval?: number;
+}
+
+const { roles = [], interval = 2500 } = Astro.props;
+const initialRole = roles[0] ?? "";
+---
+
+<p
+  class="text-base text-muted-foreground md:text-lg"
+  aria-live="polite"
+  data-role-rotator
+  data-roles={JSON.stringify(roles)}
+  data-interval={interval}
+>
+  <span class="role-swap text-gradient font-semibold" data-role-rotator-value>
+    {initialRole}
+  </span>
+</p>

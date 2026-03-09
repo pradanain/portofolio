@@ -1,6 +1,21 @@
-﻿---
-import ServicesWithFilter from "@/components/islands/ServicesWithFilter";
-import type { Service } from "@/components/islands/ServicesWithFilter";
+---
+import {
+  badgeClass,
+  buttonClass,
+  cardClass,
+  cardContentClass,
+  cardDescriptionClass,
+  cardHeaderClass,
+  cardTitleClass,
+  cx
+} from "@/lib/ui";
+
+type Service = {
+  title: string;
+  description: string;
+  tags: string[];
+  category: "Web" | "Backend" | "Data" | "Soft Skill";
+};
 
 const services: Service[] = [
   {
@@ -56,15 +71,16 @@ const stack = [
   "Public Speaking",
   "Problem Solving"
 ];
+
+const filters = ["All", "Web", "Backend", "Data", "Soft Skill"] as const;
 ---
 
 <section id="keahlian" class="section">
   <div aria-hidden="true" class="section-bg">
-    <div class="absolute -top-24 left-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"></div>
-    <div class="absolute -bottom-24 right-10 h-72 w-72 rounded-full bg-accent/10 blur-3xl"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.08),transparent_40%)]"></div>
   </div>
 
-  <div class="container relative space-y-10">
+  <div class="container relative space-y-10" data-services-filter data-initial-filter="All">
     <div class="mx-auto max-w-2xl space-y-3 text-center">
       <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Keahlian</h2>
       <p class="text-base leading-relaxed text-muted-foreground md:text-lg">
@@ -72,6 +88,84 @@ const stack = [
       </p>
     </div>
 
-    <ServicesWithFilter client:visible services={services} stack={stack} initialFilter="All" />
+    <div class="space-y-8">
+      <div class="flex flex-wrap items-center gap-2">
+        {filters.map((filter) => (
+          <button
+            type="button"
+            class={buttonClass({
+              variant: filter === "All" ? "default" : "secondary",
+              size: "sm",
+              className: "rounded-full"
+            })}
+            aria-pressed={filter === "All" ? "true" : "false"}
+            data-filter-button
+            data-filter-value={filter}
+          >
+            {filter}
+          </button>
+        ))}
+
+        <span class="ml-1 text-xs text-muted-foreground" data-filter-count>{services.length} layanan</span>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" data-filter-grid>
+        {services.map((service, idx) => (
+          <article
+            class={cardClass(
+              "group h-full overflow-hidden border-border/60 bg-card/70 transition hover:-translate-y-0.5 hover:bg-card hover:shadow-sm"
+            )}
+            data-service-card
+            data-category={service.category}
+          >
+            <div class={cx(cardHeaderClass, "space-y-3")}>
+              <div class="flex items-start justify-between gap-3">
+                <h3 class={cx(cardTitleClass, "text-lg")}>{service.title}</h3>
+
+                <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/60 bg-background/70 text-xs text-muted-foreground">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+              </div>
+
+              <p class={cx(cardDescriptionClass, "leading-relaxed")}>{service.description}</p>
+            </div>
+
+            <div class={cx(cardContentClass, "space-y-3")}>
+              <div class="flex flex-wrap gap-2">
+                {service.tags.map((item) => (
+                  <span class={badgeClass({ variant: "outline", className: "rounded-full" })}>
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              <div class="pt-1">
+                <span class={badgeClass({ variant: "secondary", className: "rounded-full" })}>
+                  {service.category}
+                </span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="relative overflow-hidden rounded-2xl border border-border/60 bg-card/70 p-6">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.08),transparent_35%)]" aria-hidden="true"></div>
+        <div class="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div class="space-y-1">
+            <p class="text-sm font-semibold text-foreground">Keahlian Utama</p>
+            <p class="text-sm text-muted-foreground">
+              Kombinasi tool dan soft skill yang paling sering dipakai.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            {stack.map((item) => (
+              <span class={badgeClass({ className: "rounded-full" })}>{item}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

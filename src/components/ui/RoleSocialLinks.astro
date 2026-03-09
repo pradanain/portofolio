@@ -1,0 +1,39 @@
+---
+interface RoleSocialLink {
+  label: string;
+  href: string;
+  svg: string;
+  external?: boolean;
+}
+
+interface Props {
+  items: RoleSocialLink[];
+  analyticsLocation?: string;
+  className?: string;
+}
+
+const {
+  items = [],
+  analyticsLocation = "social_links",
+  className = "mt-10 flex flex-wrap items-center justify-center gap-3"
+} = Astro.props;
+---
+
+<div class={className}>
+  {items.map((item) => (
+    <a
+      href={item.href}
+      class="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 text-primary transition hover:border-primary hover:bg-primary hover:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+      target={item.external ? "_blank" : undefined}
+      rel={item.external ? "noopener noreferrer" : undefined}
+      aria-label={item.label}
+      title={item.label}
+      data-ga-event="contact_click"
+      data-ga-location={analyticsLocation}
+      data-ga-channel={item.label.toLowerCase()}
+    >
+      <span class="sr-only">{item.label}</span>
+      <Fragment set:html={item.svg} />
+    </a>
+  ))}
+</div>

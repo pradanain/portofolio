@@ -1,7 +1,6 @@
-﻿---
-import ThemeToggle from "@/components/islands/ThemeToggle";
-import MobileNav from "@/components/islands/MobileNav";
-import ScrollSpy from "@/components/islands/ScrollSpy";
+---
+import ThemeToggle from "@/components/ui/ThemeToggle.astro";
+import { buttonClass } from "@/lib/ui";
 
 const navItems = [
   { label: "Beranda", href: "#beranda" },
@@ -16,16 +15,14 @@ const navItems = [
 ];
 
 const sectionIds = navItems.map((item) => item.href.replace("#", ""));
-
-const socialItems = [
-  { label: "Email", href: "mailto:novanindipradana@gmail.com" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/novanniindipradana", external: true },
-  { label: "GitHub", href: "https://github.com/pradanain", external: true },
-  { label: "Instagram", href: "https://instagram.com/pradanawae", external: true }
-];
 ---
 
-<header class="sticky top-0 z-40 w-full border-b border-border/60 bg-background/75 backdrop-blur-xl">
+<header
+  class="sticky top-0 z-40 w-full border-b border-border/60 bg-background/95"
+  data-navbar
+  data-section-ids={JSON.stringify(sectionIds)}
+  data-scroll-offset="88"
+>
   <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
 
   <div class="container flex h-16 items-center gap-3">
@@ -40,34 +37,113 @@ const socialItems = [
 
     <nav class="hidden flex-1 items-center justify-center gap-1 lg:flex" aria-label="Navigasi utama">
       {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="nav-link"
-          data-nav-link
-        >
+        <a href={item.href} class="nav-link" data-nav-link>
           {item.label}
         </a>
       ))}
     </nav>
 
     <div class="ml-auto flex items-center gap-2">
-      <ThemeToggle client:idle />
+      <ThemeToggle />
 
       <div class="lg:hidden">
-        <MobileNav
-          client:media="(max-width: 1024px)"
-          brand="novanniindipradana"
-          items={navItems}
-          socials={socialItems}
-        />
+        <button
+          type="button"
+          class={buttonClass({ variant: "outline", size: "icon" })}
+          aria-label="Open menu"
+          data-mobile-nav-open
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-4 w-4"
+            aria-hidden="true"
+          >
+            <path d="M4 5h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 19h16"></path>
+          </svg>
+        </button>
+
+        <dialog class="mobile-nav-dialog" data-mobile-nav>
+          <div class="mobile-nav-panel">
+            <div class="flex items-center justify-between gap-4">
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                novanniindipradana
+              </p>
+
+              <button
+                type="button"
+                class={buttonClass({ variant: "outline", size: "icon" })}
+                aria-label="Close menu"
+                data-mobile-nav-close
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-4 w-4"
+                  aria-hidden="true"
+                >
+                  <path d="M18 6 6 18"></path>
+                  <path d="m6 6 12 12"></path>
+                </svg>
+              </button>
+            </div>
+
+            <nav class="mt-8 flex flex-col gap-3 text-sm font-medium" aria-label="Mobile navigation">
+              {navItems.map((item) => (
+                <a
+                  href={item.href}
+                  class="rounded-xl border border-border/60 bg-card px-4 py-3 transition hover:border-primary/40 hover:bg-secondary"
+                  data-mobile-nav-link
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </dialog>
       </div>
     </div>
   </div>
-
-  <ScrollSpy client:idle sectionIds={sectionIds} />
 </header>
 
 <style>
+  .mobile-nav-dialog {
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .mobile-nav-dialog::backdrop {
+    background: rgba(15, 23, 42, 0.5);
+  }
+
+  .mobile-nav-panel {
+    min-height: 100%;
+    padding: 1.5rem;
+    background: hsl(var(--background));
+  }
+
   .nav-link {
     position: relative;
     display: inline-flex;

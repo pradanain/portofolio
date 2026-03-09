@@ -1,20 +1,24 @@
-﻿---
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+---
+import { Image } from "astro:assets";
+import {
+  badgeClass,
+  cardClass,
+  cardContentClass,
+  cardHeaderClass,
+  cardTitleClass,
+  cx
+} from "@/lib/ui";
 import { experiences } from "@/data/experience";
 ---
 
 <section id="pengalaman" class="section">
   <div aria-hidden="true" class="section-bg">
-    <div class="absolute -top-24 left-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"></div>
-    <div class="absolute -bottom-24 right-10 h-72 w-72 rounded-full bg-accent/10 blur-3xl"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.08),transparent_40%)]"></div>
   </div>
 
   <div class="container relative space-y-10">
     <div class="mx-auto max-w-2xl space-y-3 text-center">
-      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">
-        Pengalaman
-      </h2>
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Pengalaman</h2>
       <p class="text-base leading-relaxed text-muted-foreground md:text-lg">
         Peran profesional dan kontribusi utama.
       </p>
@@ -23,54 +27,45 @@ import { experiences } from "@/data/experience";
     <div class="space-y-6">
       {experiences.map((exp, idx) => (
         <div class="relative pl-8">
-          <div
-            aria-hidden="true"
-            class="absolute left-3 top-0 bottom-0 w-px bg-border/80"
-          ></div>
+          <div aria-hidden="true" class="absolute bottom-0 left-3 top-0 w-px bg-border/80"></div>
+          <div aria-hidden="true" class="absolute left-2.25 top-8 h-3 w-3 rounded-full bg-primary ring-4 ring-background"></div>
 
-          <div
-            aria-hidden="true"
-            class="absolute left-2.25 top-8 h-3 w-3 rounded-full bg-primary ring-4 ring-background"
-          ></div>
-
-          <Card className="group border-border/60 bg-card/70 transition hover:-translate-y-0.5 hover:bg-card hover:shadow-sm focus-within:ring-2 focus-within:ring-primary/40">
-            <CardHeader className="space-y-3">
+          <article class={cardClass("group border-border/60 bg-card/70 transition hover:-translate-y-0.5 hover:bg-card hover:shadow-sm focus-within:ring-2 focus-within:ring-primary/40")}>
+            <div class={cx(cardHeaderClass, "space-y-3")}>
               <div class="flex flex-wrap items-start justify-between gap-3">
                 <div class="flex min-w-0 items-center gap-3">
                   <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-secondary">
-                    <img
+                    <Image
                       src={exp.logo}
                       alt={`${exp.company} logo`}
-                      class="h-6 w-6"
+                      class="h-6 w-6 object-contain"
+                      width={96}
+                      quality={82}
+                      format="webp"
                       loading="lazy"
-                      decoding="async"
                     />
                   </div>
 
                   <div class="min-w-0">
-                    <CardTitle className="truncate">{exp.company}</CardTitle>
+                    <h3 class={cx(cardTitleClass, "truncate")}>{exp.company}</h3>
 
-                    <CardDescription className="mt-1">
+                    <p class="mt-1 text-sm text-muted-foreground">
                       <span class="font-medium text-foreground">{exp.role}</span>
                       <span class="text-muted-foreground"> · {exp.employmentType}</span>
-                    </CardDescription>
+                    </p>
                   </div>
                 </div>
 
-                <Badge variant="secondary" className="shrink-0 rounded-full">
+                <span class={badgeClass({ variant: "secondary", className: "shrink-0 rounded-full" })}>
                   {exp.period}
-                </Badge>
+                </span>
               </div>
 
               <p class="text-sm text-muted-foreground">{exp.location}</p>
-            </CardHeader>
+            </div>
 
-            <CardContent className="space-y-4">
-              {exp.summary ? (
-                <p class="text-sm leading-relaxed text-foreground">
-                  {exp.summary}
-                </p>
-              ) : null}
+            <div class={cx(cardContentClass, "space-y-4")}>
+              {exp.summary ? <p class="text-sm leading-relaxed text-foreground">{exp.summary}</p> : null}
 
               {exp.highlights?.length ? (
                 <ul class="space-y-2 pl-5 text-sm text-muted-foreground">
@@ -83,18 +78,16 @@ import { experiences } from "@/data/experience";
               {exp.tech?.length ? (
                 <div class="flex flex-wrap gap-2 pt-1">
                   {exp.tech.map((tech) => (
-                    <Badge variant="outline" className="rounded-full">
+                    <span class={badgeClass({ variant: "outline", className: "rounded-full" })}>
                       {tech}
-                    </Badge>
+                    </span>
                   ))}
                 </div>
               ) : null}
 
-              <div class="pt-1 text-xs text-muted-foreground">
-                {String(idx + 1).padStart(2, "0")}
-              </div>
-            </CardContent>
-          </Card>
+              <div class="pt-1 text-xs text-muted-foreground">{String(idx + 1).padStart(2, "0")}</div>
+            </div>
+          </article>
         </div>
       ))}
     </div>

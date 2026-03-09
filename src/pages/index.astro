@@ -19,45 +19,68 @@ const description =
   "Portfolio personal Novanni Indi Pradana - Software Developer & Data Engineer di BPS - Statistics Indonesia.";
 
 const site = Astro.site ?? new URL("https://novanniindipradana.com");
-const basePath = import.meta.env.BASE_URL ?? "/";
-const siteUrl = site.origin;
-const canonicalUrl = new URL(basePath, site).href;
+const sitePath = site.pathname === "/" ? "" : site.pathname.replace(/\/$/, "");
+const siteUrl = site.toString().replace(/\/$/, "");
+const requestPath = Astro.url?.pathname ?? "/";
+const canonicalPath =
+  !sitePath || requestPath === sitePath || requestPath.startsWith(`${sitePath}/`)
+    ? requestPath
+    : requestPath === "/"
+      ? `${sitePath}/`
+      : `${sitePath}${requestPath}`;
 const ogImage = await getImage({
   src: profileImage,
   width: 1200,
-  quality: 92,
+  quality: 88,
   format: "jpeg"
 });
-const ogImageUrl = new URL(ogImage.src, site).href;
+const canonicalUrl = new URL(canonicalPath, site.origin).href;
+const ogImagePath = ogImage.src.startsWith(sitePath) || !sitePath
+  ? ogImage.src
+  : `${sitePath}/${ogImage.src.replace(/^\//, "")}`;
+const ogImageUrl = new URL(ogImagePath, site.origin).href;
 const iconHref = withBase("logo.png");
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Novanni Indi Pradana",
+  url: siteUrl,
+  image: ogImageUrl,
+  jobTitle: "Software Developer & Data Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: "BPS - Statistics Indonesia"
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/novanniindipradana",
+    "https://github.com/pradanain",
+    "https://instagram.com/pradanawae"
+  ]
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Novanni Indi Pradana",
+  url: siteUrl,
+  description,
+  inLanguage: "id-ID",
+  publisher: {
+    "@type": "Person",
+    name: "Novanni Indi Pradana"
+  }
+};
 ---
 
 <!doctype html>
-<html lang="id">
+<html lang="id" data-ga-id="G-DM214RN0X6">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script is:inline>
-      (() => {
-        try {
-          const stored = localStorage.getItem("theme");
-          const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          const theme = stored === "light" || stored === "dark" ? stored : (systemDark ? "dark" : "light");
-          const root = document.documentElement;
-          root.classList.toggle("dark", theme === "dark");
-          root.setAttribute("data-theme", theme);
-        } catch {}
-      })();
-    </script>
+    <script src={withBase("scripts/site.js")}></script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DM214RN0X6"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", "G-DM214RN0X6");
-    </script>
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -73,10 +96,6 @@ const iconHref = withBase("logo.png");
 
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-
-    <script is:inline>
-      document.documentElement.classList.add("has-js");
-    </script>
 
     <link rel="icon" type="image/png" href={iconHref} />
 
@@ -103,39 +122,8 @@ const iconHref = withBase("logo.png");
     <meta name="twitter:site" content="@pradanawae" />
     <meta name="twitter:creator" content="@pradanawae" />
 
-    <script type="application/ld+json" is:inline>
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: "Novanni Indi Pradana",
-        url: siteUrl,
-        image: ogImageUrl,
-        jobTitle: "Software Developer & Data Engineer",
-        worksFor: {
-          "@type": "Organization",
-          name: "BPS - Statistics Indonesia"
-        },
-        sameAs: [
-          "https://www.linkedin.com/in/novanniindipradana",
-          "https://github.com/pradanain",
-          "https://instagram.com/pradanawae"
-        ]
-      })}
-    </script>
-    <script type="application/ld+json" is:inline>
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        name: "Novanni Indi Pradana",
-        url: siteUrl,
-        description,
-        inLanguage: "id-ID",
-        publisher: {
-          "@type": "Person",
-          name: "Novanni Indi Pradana"
-        }
-      })}
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)}></script>
   </head>
 
   <body class="min-h-screen bg-background text-foreground antialiased">
@@ -167,40 +155,6 @@ const iconHref = withBase("logo.png");
     </p>
   </div>
 </footer>
-
-    <script is:inline>
-      (() => {
-        const getTarget = (node) =>
-          node instanceof Element ? node.closest("[data-ga-event]") : null;
-
-        document.addEventListener("click", (event) => {
-          const target = getTarget(event.target);
-          if (!target) return;
-          const eventName = target.getAttribute("data-ga-event");
-          if (!eventName || typeof window.gtag !== "function") return;
-
-          const params = {};
-          const channel = target.getAttribute("data-ga-channel");
-          const location = target.getAttribute("data-ga-location");
-          const projectName = target.getAttribute("data-ga-project");
-          const type = target.getAttribute("data-ga-type");
-          const fileName = target.getAttribute("data-ga-file");
-
-          if (channel) params.channel = channel;
-          if (location) params.location = location;
-          if (projectName) params.project_name = projectName;
-          if (type) params.type = type;
-          if (fileName) params.file_name = fileName;
-
-          if (target instanceof HTMLAnchorElement && target.href) {
-            params.link_url = target.href;
-          }
-
-          window.gtag("event", eventName, params);
-        });
-      })();
-    </script>
-
 
   </body>
 </html>

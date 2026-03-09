@@ -1,4 +1,6 @@
-﻿---
+---
+import RoleSocialLinks from "@/components/ui/RoleSocialLinks.astro";
+
 const contacts = [
   {
     label: "Email",
@@ -58,8 +60,7 @@ const contacts = [
 
 <section id="kontak" class="section pt-28 pb-20 md:pt-36 md:pb-28">
   <div aria-hidden="true" class="section-bg">
-    <div class="absolute -top-24 left-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"></div>
-    <div class="absolute -bottom-24 right-10 h-72 w-72 rounded-full bg-accent/10 blur-3xl"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.08),transparent_40%)]"></div>
   </div>
 
   <div class="container">
@@ -68,28 +69,10 @@ const contacts = [
         Kontak
       </h2>
       <p class="mx-auto max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
-        Saya biasanya merespons dalam 1–2 hari kerja.
+        Saya biasanya merespons dalam 1-2 hari kerja.
       </p>
     </div>
 
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
-      {contacts.map((c) => (
-        <a
-          href={c.href}
-          class="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 text-primary transition hover:border-primary hover:bg-primary hover:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
-          target={c.external ? "_blank" : undefined}
-          rel={c.external ? "noopener noreferrer" : undefined}
-          aria-label={c.label}
-          title={c.label}
-          data-ga-event="contact_click"
-          data-ga-location="contact_section"
-          data-ga-channel={c.label.toLowerCase()}
-        >
-          <span class="sr-only">{c.label}</span>
-          <Fragment set:html={c.svg} />
-        </a>
-      ))}
-    </div>
-
+    <RoleSocialLinks items={contacts} analyticsLocation="contact_section" />
   </div>
 </section>

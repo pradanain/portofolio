@@ -60,22 +60,26 @@
     @apply bg-background text-foreground antialiased;
     font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
     background-image:
-      radial-gradient(circle at top right, rgba(56, 189, 248, 0.15), transparent 42%),
-      radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.18), transparent 45%),
-      radial-gradient(circle at 70% 80%, rgba(99, 102, 241, 0.12), transparent 45%);
-    background-attachment: fixed;
-  }
-
-  @media (max-width: 768px) {
-    body {
-      background-attachment: scroll;
-    }
+      radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 42%),
+      radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.12), transparent 45%),
+      linear-gradient(180deg, rgba(15, 23, 42, 0.02), transparent 28%);
   }
 
   h1, h2, h3, h4 {
     font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
   }
 
+  .theme-icon-dark {
+    display: none;
+  }
+
+  .dark .theme-icon-light {
+    display: none;
+  }
+
+  .dark .theme-icon-dark {
+    display: block;
+  }
 
   img {
     display: block;
@@ -142,10 +146,6 @@
     @apply mt-2 text-sm md:text-base text-muted-foreground text-center mx-auto max-w-2xl;
   }
 
-  .glass {
-    @apply bg-background/80 backdrop-blur-xl shadow-glow border border-border/60;
-  }
-
   .nav-link {
     @apply relative text-muted-foreground transition-colors hover:text-foreground;
   }
@@ -163,53 +163,10 @@
     width: 100%;
   }
 
-  .details summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .details-summary {
-    @apply select-none;
-  }
-
-  .details-chevron {
-    transition: transform 0.3s ease;
-  }
-
-  .details[open] .details-chevron {
-    transform: rotate(180deg);
-  }
-
-  .details-content {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: max-height 0.45s ease, opacity 0.3s ease, transform 0.3s ease;
-    will-change: max-height, opacity, transform;
-  }
-
-  .details[open] .details-content {
-    max-height: 2000px;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   .role-swap {
     display: inline-block;
     animation: roleSwap 0.45s ease;
-    will-change: opacity, transform, filter;
-  }
-
-  html.has-js .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
     will-change: opacity, transform;
-  }
-
-  html.has-js .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -224,25 +181,16 @@
     from {
       opacity: 0;
       transform: translateY(6px);
-      filter: blur(6px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
-      filter: blur(0);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html.has-js .reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-
     .role-swap {
       animation: none;
-      filter: none;
     }
   }
 }

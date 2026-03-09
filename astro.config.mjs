@@ -3,7 +3,6 @@ import { fileURLToPath } from 'url';
 
 import tailwindcss from '@tailwindcss/vite';
 
-import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1];
@@ -46,9 +45,11 @@ const fallbackSite = isGithubPages
   : 'https://pradanain.github.io/portofolio';
 
 const site = normalizeSite(envSite) ?? fallbackSite;
+const sitePath = new URL(site).pathname;
+const defaultBase = sitePath === '/' ? '/' : sitePath.endsWith('/') ? sitePath : `${sitePath}/`;
 const base =
   normalizeBase(envBase) ??
-  (isGithubPages && repo && !isUserPage ? `/${repo}/` : '/');
+  (isGithubPages && repo && !isUserPage ? `/${repo}/` : defaultBase);
 
 export default defineConfig({
   site,
@@ -62,5 +63,5 @@ export default defineConfig({
     }
   },
 
-  integrations: [react(), sitemap()]
+  integrations: [sitemap()]
 });

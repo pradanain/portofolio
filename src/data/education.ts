@@ -1,4 +1,7 @@
-﻿import { withBase } from "@/lib/withBase";
+import type { ImageMetadata } from "astro";
+
+import logoStis from "@/assets/logos/logo-stis.webp";
+import logoSman from "@/assets/logos/logo-sman-1-kendal.webp";
 
 export type Education = {
   school: string;
@@ -6,7 +9,7 @@ export type Education = {
   period: string;
   description: string;
   gpa?: string;
-  logo: string;
+  logo: ImageMetadata;
   url?: string;
 };
 
@@ -18,13 +21,13 @@ export const education: Education[] = [
     description:
       "Konsentrasi pada data engineering, statistik terapan, dan pengembangan aplikasi.",
     gpa: "IPK: 3.71 (Cum Laude)",
-    logo: withBase("logos/logo-stis.png"),
+    logo: logoStis
   },
   {
     school: "SMA Negeri 1 Kendal",
     program: "MIPA",
     period: "2016 - 2019",
     description: "Fokus pada matematika, sains, dan penguatan dasar analitis.",
-    logo: withBase("logos/logo-sman-1-kendal.jpg"),
-  },
+    logo: logoSman
+  }
 ];

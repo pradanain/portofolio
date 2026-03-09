@@ -1,4 +1,10 @@
-import { withBase } from "@/lib/withBase";
+import type { ImageMetadata } from "astro";
+
+import logoDescent from "@/assets/logos/logo-descent-stis.webp";
+import logoPkl from "@/assets/logos/logo-pkl-62.webp";
+import logoStis62 from "@/assets/logos/logo-stis-62.webp";
+import logoDn63 from "@/assets/logos/logo-dn-63.webp";
+import logoKomnet from "@/assets/logos/logo-komnet.webp";
 
 export type OrganizationExperience = {
   organization: string;
@@ -8,7 +14,7 @@ export type OrganizationExperience = {
   summary: string;
   highlights: string[];
   skills: string[];
-  logo: string;
+  logo: ImageMetadata;
 };
 
 export const organizations: OrganizationExperience[] = [
@@ -21,10 +27,10 @@ export const organizations: OrganizationExperience[] = [
       "Menjabat sebagai Ketua, bertanggung jawab mengoordinasikan perencanaan, pelaksanaan, dan evaluasi kegiatan.",
     highlights: [
       "Melakukan koordinasi lintas UKM untuk mendukung promosi kegiatan.",
-      "Mendukung pelaksanaan kegiatan agar berjalan sesuai rencana.",
+      "Mendukung pelaksanaan kegiatan agar berjalan sesuai rencana."
     ],
     skills: ["Leadership", "Manajemen Tim", "Program Development"],
-    logo: withBase("logos/logo-descent-stis.jpg"),
+    logo: logoDescent
   },
   {
     organization: "Praktik Kerja Lapangan (PKL) D-IV STIS 62",
@@ -37,10 +43,10 @@ export const organizations: OrganizationExperience[] = [
       "Menyiapkan aplikasi pengumpulan data berbasis Android (CAPI).",
       "Merancang kuesioner yang kompatibel dengan sistem CAPI.",
       "Menyiapkan server dan aplikasi pendukung pengumpulan data.",
-      "Mengembangkan sistem monitoring proses pengumpulan data.",
+      "Mengembangkan sistem monitoring proses pengumpulan data."
     ],
     skills: ["Koordinasi Teknis", "Sistem Data", "Problem Solving"],
-    logo: withBase("logos/logo-pkl-62.png"),
+    logo: logoPkl
   },
   {
     organization: "Pengurus Angkatan STIS 62",
@@ -52,10 +58,10 @@ export const organizations: OrganizationExperience[] = [
     highlights: [
       "Menjembatani kebutuhan akademik dan komunikasi lintas kelas.",
       "Mendorong kolaborasi dan kekompakan angkatan.",
-      "Manajemen Divisi IT dalam pembangunan sistem informasi angkatan.",
+      "Manajemen Divisi IT dalam pembangunan sistem informasi angkatan."
     ],
     skills: ["Leadership", "Koordinasi", "Komunikasi"],
-    logo: withBase("logos/logo-stis-62.jpg"),
+    logo: logoStis62
   },
   {
     organization:
@@ -68,10 +74,10 @@ export const organizations: OrganizationExperience[] = [
     highlights: [
       "Mengelola tugas administratif dan koordinasi lintas divisi.",
       "Menangani logistik dan kebutuhan sumber daya acara.",
-      "Mendukung operasional kegiatan sesuai rencana dan jadwal.",
+      "Mendukung operasional kegiatan sesuai rencana dan jadwal."
     ],
     skills: ["Administrasi", "Logistik", "Koordinasi"],
-    logo: withBase("logos/logo-dn-63.jpg"),
+    logo: logoDn63
   },
   {
     organization: "Komputasi.net (Komnet) STIS",
@@ -82,10 +88,9 @@ export const organizations: OrganizationExperience[] = [
       "Mengelola program pelatihan untuk meningkatkan keterampilan teknis anggota di bidang IT dan data.",
     highlights: [
       "Menyusun agenda pelatihan dan pengembangan skill teknis.",
-      "Mengkoordinasikan pelaksanaan kelas dan sesi praktik.",
+      "Mengkoordinasikan pelaksanaan kelas dan sesi praktik."
     ],
     skills: ["Program Pelatihan", "Manajemen Kelas", "Teknis"],
-    logo: withBase("logos/logo-komnet.jpg"),
-  },
+    logo: logoKomnet
+  }
 ];
-

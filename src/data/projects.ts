@@ -1,4 +1,11 @@
-﻿import { withBase } from "@/lib/withBase";
+import type { ImageMetadata } from "astro";
+
+import dirgcGui from "@/assets/screenshots/dirgc-gui.webp";
+import sigapScreenshot from "@/assets/screenshots/sigap-6502.webp";
+import tlBpkScreenshot from "@/assets/screenshots/tl-bpk.webp";
+import spbeScreenshot from "@/assets/screenshots/spbe-bps.webp";
+import spmbScreenshot from "@/assets/screenshots/spmb-stis.webp";
+import sigmaScreenshot from "@/assets/screenshots/sigma-stis.webp";
 
 export type ProjectCategory = "Web" | "Data" | "Automation" | "Mobile";
 
@@ -8,11 +15,9 @@ export type Project = {
   impact?: string;
   category: ProjectCategory;
   stack: string[];
-  logo: string;
-  image?: string;
+  image?: ImageMetadata;
   demoUrl?: string;
   repoUrl?: string;
-  featured?: boolean;
 };
 
 export const featuredProjects: Project[] = [
@@ -24,10 +29,8 @@ export const featuredProjects: Project[] = [
       "Mengurangi input manual dengan otomatisasi berbasis Excel dan logging terpusat.",
     category: "Automation",
     stack: ["BPS", "Playwright", "Python", "Excel", "PyQt5", "QFluentWidgets"],
-    logo: withBase("logos/gc.svg"),
-    image: withBase("screenshots/dirgc-gui.jpg"),
-    repoUrl: "https://github.com/bpskabbulungan/otomatisasidirgc-6502",
-    featured: true,
+    image: dirgcGui,
+    repoUrl: "https://github.com/bpskabbulungan/otomatisasidirgc-6502"
   },
   {
     title: "SIGAP - Sistem Informasi Pengingat Presensi",
@@ -37,10 +40,8 @@ export const featuredProjects: Project[] = [
       "Kontrol bot presensi dan jadwal otomatis dalam satu dashboard terpusat.",
     category: "Automation",
     stack: ["BPS", "Web Dashboard", "WhatsApp Bot", "Scheduling"],
-    logo: withBase("logos/sigap.svg"),
-    image: withBase("screenshots/sigap-6502.jpg"),
-    repoUrl: "https://github.com/bpskabbulungan/sigap-6502",
-    featured: true,
+    image: sigapScreenshot,
+    repoUrl: "https://github.com/bpskabbulungan/sigap-6502"
   },
   {
     title: "TL BPK - Sistem Informasi Tindak Lanjut Rekomendasi BPK",
@@ -50,10 +51,8 @@ export const featuredProjects: Project[] = [
       "Merapikan tracking rekomendasi dengan dokumentasi terpusat dan akses terkontrol.",
     category: "Web",
     stack: ["BPS", "BPK", "Information System", "Workflow", "Audit", "Laravel"],
-    logo: withBase("logos/tl-bpk.svg"),
-    image: withBase("screenshots/tl-bpk.jpg"),
-    repoUrl: "https://github.com/pradanain/tl-bpk-bps",
-    featured: true,
+    image: tlBpkScreenshot,
+    repoUrl: "https://github.com/pradanain/tl-bpk-bps"
   },
   {
     title: "SPBE BPS - Sistem Manajemen Perubahan TI",
@@ -62,11 +61,9 @@ export const featuredProjects: Project[] = [
     impact: "Mengelola perubahan TI end-to-end sesuai arahan PAN-RB.",
     category: "Web",
     stack: ["BPS", "Information System", "SPBE", "Documentation", "Laravel"],
-    logo: withBase("logos/spbe.svg"),
-    image: withBase("screenshots/spbe-bps.jpg"),
-    repoUrl: "https://github.com/pradanain/spbe-bps",
-    featured: true,
-  },
+    image: spbeScreenshot,
+    repoUrl: "https://github.com/pradanain/spbe-bps"
+  }
 ];
 
 export const projects: Project[] = [
@@ -78,9 +75,8 @@ export const projects: Project[] = [
       "Mempercepat verifikasi dan pelaporan pengawasan SPMB dalam satu platform terpusat.",
     category: "Web",
     stack: ["STIS", "Java", "Spring Boot", "Web", "Entrance Exam"],
-    logo: withBase("logos/spmb.svg"),
-    image: withBase("screenshots/spmb-stis.jpg"),
-    repoUrl: "https://github.com/pradanain/SPMB-STIS-Java-SpringBoot",
+    image: spmbScreenshot,
+    repoUrl: "https://github.com/pradanain/SPMB-STIS-Java-SpringBoot"
   },
   {
     title: "SIGMA STIS - Sistem Informasi Kegiatan Mahasiswa",
@@ -90,8 +86,7 @@ export const projects: Project[] = [
       "Mempermudah akses informasi kegiatan dan mendorong partisipasi mahasiswa.",
     category: "Mobile",
     stack: ["STIS", "Java", "Android", "Student Activities"],
-    logo: withBase("logos/sigma.svg"),
-    image: withBase("screenshots/sigma-stis.jpg"),
-    repoUrl: "https://github.com/pradanain/SIGMA-STIS-AndroidApp",
-  },
+    image: sigmaScreenshot,
+    repoUrl: "https://github.com/pradanain/SIGMA-STIS-AndroidApp"
+  }
 ];
