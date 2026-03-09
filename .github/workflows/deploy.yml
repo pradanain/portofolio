@@ -21,6 +21,37 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v6
+      - name: Validate GitHub Pages configuration
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+
+            try {
+              const { data } = await github.request('GET /repos/{owner}/{repo}/pages', {
+                owner,
+                repo,
+              });
+
+              if (data.build_type !== 'workflow') {
+                core.setFailed(
+                  `GitHub Pages is configured with build_type="${data.build_type}". ` +
+                  'Open Settings > Pages and set Source to "GitHub Actions".'
+                );
+              }
+            } catch (error) {
+              if (error.status === 404) {
+                core.setFailed(
+                  'GitHub Pages is not enabled for this repository. ' +
+                  'Open Settings > Pages and set Source to "GitHub Actions".'
+                );
+                return;
+              }
+
+              throw error;
+            }
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
       - name: Install, build, and upload your site
         uses: withastro/action@v5
 
