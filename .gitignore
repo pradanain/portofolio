@@ -8,9 +8,13 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
 .env
 .env.production
+
+# Generated audit artifacts
+.audit-lighthouse.json
+.audit-preview-root/
+audit-*.png
 
 .DS_Store
 
