@@ -17,7 +17,9 @@ type Service = {
   category: "Web" | "Backend" | "Data" | "Soft Skill";
 };
 
-const services: Service[] = [
+const isEn = Astro.url.pathname.includes('/en');
+
+const servicesId: Service[] = [
   {
     title: "Front-end Development",
     description: "Membangun antarmuka modern yang responsif dan mudah dipakai.",
@@ -56,6 +58,47 @@ const services: Service[] = [
   }
 ];
 
+const servicesEn: Service[] = [
+  {
+    title: "Front-end Development",
+    description: "Building modern interfaces that are responsive and user-friendly.",
+    tags: ["React", "Tailwind", "UI/UX", "Responsive"],
+    category: "Web"
+  },
+  {
+    title: "Back-end Development",
+    description: "Developing secure APIs and server logic connected to databases.",
+    tags: ["PHP", "Laravel", "MySQL", "PostgreSQL", "REST API"],
+    category: "Backend"
+  },
+  {
+    title: "Dashboard",
+    description: "Creating concise and easy-to-understand metric dashboards for monitoring.",
+    tags: ["KPI", "Data Viz", "SQL", "Reporting"],
+    category: "Data"
+  },
+  {
+    title: "Automation",
+    description: "Automating workflows and web testing with repeatable scripting.",
+    tags: ["Python", "Selenium", "Playwright", "Automation"],
+    category: "Backend"
+  },
+  {
+    title: "Data Engineering",
+    description: "Building data pipelines for experiments, analysis, and clean processing in notebooks or production.",
+    tags: ["Python", "R", "Google Colab", "ETL/ELT"],
+    category: "Data"
+  },
+  {
+    title: "Public Speaking & Problem Solving",
+    description: "Delivering ideas and technical insights clearly and solving problems systematically.",
+    tags: ["Public Speaking", "Problem Solving"],
+    category: "Soft Skill"
+  }
+];
+
+const services = isEn ? servicesEn : servicesId;
+
 const stack = [
   "PHP",
   "Laravel",
@@ -73,18 +116,23 @@ const stack = [
 ];
 
 const filters = ["All", "Web", "Backend", "Data", "Soft Skill"] as const;
+const sectionTitle = isEn ? "Skills" : "Keahlian";
+const sectionDesc = isEn 
+  ? "Focused on front-end, back-end development, data engineering, automation, and dashboards, with a commitment to continuous learning and improving solution quality."
+  : "Berfokus pada pengembangan front-end, back-end, data engineering, automation, dan dashboard, dengan komitmen untuk terus belajar dan meningkatkan kualitas solusi.";
+const serviceCountLabel = isEn ? "services" : "layanan";
 ---
 
 <section id="keahlian" class="section">
-  <div aria-hidden="true" class="section-bg">
+  <div aria-hidden="true" class="section-bg [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)]">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.08),transparent_40%)]"></div>
   </div>
 
   <div class="container relative space-y-10" data-services-filter data-initial-filter="All">
     <div class="mx-auto max-w-2xl space-y-3 text-center">
-      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Keahlian</h2>
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">{sectionTitle}</h2>
       <p class="text-base leading-relaxed text-muted-foreground md:text-lg">
-        Berfokus pada pengembangan front-end, back-end, data engineering, automation, dan dashboard, dengan komitmen untuk terus belajar dan meningkatkan kualitas solusi.
+        {sectionDesc}
       </p>
     </div>
 
@@ -106,14 +154,14 @@ const filters = ["All", "Web", "Backend", "Data", "Soft Skill"] as const;
           </button>
         ))}
 
-        <span class="ml-1 text-xs text-muted-foreground" data-filter-count>{services.length} layanan</span>
+        <span class="ml-1 text-xs text-muted-foreground" data-filter-count>{services.length} {serviceCountLabel}</span>
       </div>
 
       <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" data-filter-grid>
         {services.map((service, idx) => (
           <article
             class={cardClass(
-              "group h-full overflow-hidden border-border/60 bg-card/70 transition hover:-translate-y-0.5 hover:bg-card hover:shadow-sm"
+              "group h-full overflow-hidden border-border/60 bg-card/70 transition-all duration-300 hover:-translate-y-2 hover:bg-card hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)] reveal-on-scroll"
             )}
             data-service-card
             data-category={service.category}

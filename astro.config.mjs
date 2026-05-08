@@ -42,7 +42,7 @@ const fallbackSite = isGithubPages
   ? repo && !isUserPage
     ? `https://${owner}.github.io/${repo}`
     : `https://${owner}.github.io`
-  : 'https://pradanain.github.io/portofolio';
+  : 'https://pradanain.id';
 
 const site = normalizeSite(envSite) ?? fallbackSite;
 const sitePath = new URL(site).pathname;

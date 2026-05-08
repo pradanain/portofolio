@@ -1,6 +1,6 @@
 ---
 import { getImage } from "astro:assets";
-import "../styles/global.css";
+import "@/styles/global.css";
 import Navbar from "@/components/layout/Navbar.astro";
 import Hero from "@/components/sections/Hero.astro";
 import WhatIDo from "@/components/sections/WhatIDo.astro";
@@ -23,21 +23,24 @@ const sitePath = site.pathname === "/" ? "" : site.pathname.replace(/\/$/, "");
 const siteUrl = site.toString().replace(/\/$/, "");
 const requestPath = Astro.url?.pathname ?? "/";
 const canonicalPath =
-  !sitePath || requestPath === sitePath || requestPath.startsWith(`${sitePath}/`)
+  !sitePath ||
+  requestPath === sitePath ||
+  requestPath.startsWith(`${sitePath}/`)
     ? requestPath
     : requestPath === "/"
-      ? `${sitePath}/`
-      : `${sitePath}${requestPath}`;
+    ? `${sitePath}/`
+    : `${sitePath}${requestPath}`;
 const ogImage = await getImage({
   src: profileImage,
   width: 1200,
   quality: 88,
-  format: "jpeg"
+  format: "jpeg",
 });
 const canonicalUrl = new URL(canonicalPath, site.origin).href;
-const ogImagePath = ogImage.src.startsWith(sitePath) || !sitePath
-  ? ogImage.src
-  : `${sitePath}/${ogImage.src.replace(/^\//, "")}`;
+const ogImagePath =
+  ogImage.src.startsWith(sitePath) || !sitePath
+    ? ogImage.src
+    : `${sitePath}/${ogImage.src.replace(/^\//, "")}`;
 const ogImageUrl = new URL(ogImagePath, site.origin).href;
 const iconHref = withBase("logo.png");
 const personSchema = {
@@ -49,13 +52,13 @@ const personSchema = {
   jobTitle: "Software Developer & Data Engineer",
   worksFor: {
     "@type": "Organization",
-    name: "BPS - Statistics Indonesia"
+    name: "BPS - Statistics Indonesia",
   },
   sameAs: [
     "https://www.linkedin.com/in/novanniindipradana",
     "https://github.com/pradanain",
-    "https://instagram.com/pradanawae"
-  ]
+    "https://instagram.com/pradanawae",
+  ],
 };
 
 const websiteSchema = {
@@ -64,23 +67,24 @@ const websiteSchema = {
   name: "Novanni Indi Pradana",
   url: siteUrl,
   description,
-  inLanguage: "id-ID",
+  inLanguage: "en-US",
   publisher: {
     "@type": "Person",
-    name: "Novanni Indi Pradana"
-  }
+    name: "Novanni Indi Pradana",
+  },
 };
 ---
 
-<!doctype html>
-<html lang="id" data-ga-id="G-DM214RN0X6">
+<!DOCTYPE html>
+<html lang="en" data-ga-id="G-DM214RN0X6">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src={withBase("scripts/site.js")}></script>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DM214RN0X6"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DM214RN0X6"
+    ></script>
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -94,8 +98,16 @@ const websiteSchema = {
       content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'"
     />
 
-    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta
+      name="theme-color"
+      content="#0f172a"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
 
     <link rel="icon" type="image/png" href={iconHref} />
 
@@ -113,7 +125,7 @@ const websiteSchema = {
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:alt" content="Foto Novanni Indi Pradana" />
     <meta property="og:site_name" content="Novanni Indi Pradana" />
-    <meta property="og:locale" content="id_ID" />
+    <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -122,18 +134,13 @@ const websiteSchema = {
     <meta name="twitter:site" content="@pradanawae" />
     <meta name="twitter:creator" content="@pradanawae" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
-    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)}
+    ></script>
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)}
+    ></script>
   </head>
 
   <body class="min-h-screen bg-background text-foreground antialiased">
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-background focus:px-3 focus:py-2 focus:text-sm focus:shadow"
-    >
-      Lewati ke konten utama
-    </a>
-
     <Navbar />
 
     <main id="main">
@@ -148,20 +155,31 @@ const websiteSchema = {
       <Contact />
     </main>
 
-<footer class="border-t border-border/60 py-10">
-  <div class="container">
-    <p class="text-center text-sm text-muted-foreground">
-      © 2026 Novanni Indi Pradana. All rights reserved.
-    </p>
-  </div>
-</footer>
+    <footer class="border-t border-border/60 py-10">
+      <div class="container">
+        <p class="text-center text-sm text-muted-foreground">
+          © 2026 Novanni Indi Pradana. All rights reserved.
+        </p>
+      </div>
+    </footer>
     <button
       id="back-to-top"
       aria-label="Kembali ke atas"
       class="fixed bottom-6 right-6 z-50 rounded-full bg-primary p-3 text-primary-foreground shadow-lg opacity-0 pointer-events-none transition-all duration-300 translate-y-4 hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:bottom-8 sm:right-8"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
-        <path d="m18 15-6-6-6 6"/>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="h-5 w-5"
+      >
+        <path d="m18 15-6-6-6 6"></path>
       </svg>
     </button>
   </body>

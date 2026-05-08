@@ -56,6 +56,12 @@ const contacts = [
     </svg>`
   }
 ];
+
+const isEn = Astro.url.pathname.includes('/en');
+const sectionTitle = isEn ? "Contact" : "Kontak";
+const sectionDesc = isEn 
+  ? "I usually respond within 1-2 business days." 
+  : "Saya biasanya merespons dalam 1-2 hari kerja.";
 ---
 
 <section id="kontak" class="section pt-28 pb-20 md:pt-36 md:pb-28">
@@ -66,10 +72,10 @@ const contacts = [
   <div class="container">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-        Kontak
+        {sectionTitle}
       </h2>
       <p class="mx-auto max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
-        Saya biasanya merespons dalam 1-2 hari kerja.
+        {sectionDesc}
       </p>
     </div>
 

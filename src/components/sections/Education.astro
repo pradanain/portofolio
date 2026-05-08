@@ -9,7 +9,13 @@ import {
   cardTitleClass,
   cx
 } from "@/lib/ui";
-import { education } from "@/data/education";
+import { education as educationId } from "@/data/education";
+import { education as educationEn } from "@/data/en/education";
+
+const isEn = Astro.url.pathname.includes('/en');
+const education = isEn ? educationEn : educationId;
+const sectionTitle = isEn ? "Education" : "Pendidikan";
+const btnDetail = isEn ? "View Details" : "Lihat Detail";
 ---
 
 <section id="pendidikan" class="section">
@@ -19,12 +25,12 @@ import { education } from "@/data/education";
 
   <div class="container">
     <div class="mx-auto mb-16 max-w-3xl text-center">
-      <h2 class="mb-4 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">Pendidikan</h2>
+      <h2 class="mb-4 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">{sectionTitle}</h2>
     </div>
 
     <div class="grid gap-6 md:grid-cols-2">
       {education.map((item) => (
-        <article class={cardClass("group h-full border-border/60 bg-card/70 transition hover:-translate-y-0.5 hover:bg-card hover:shadow-sm focus-within:ring-2 focus-within:ring-primary/40")}>
+        <article class={cardClass("group h-full border-border/60 bg-card/70 transition-all duration-300 hover:-translate-y-2 hover:bg-card hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)] focus-within:ring-2 focus-within:ring-primary/40 reveal-on-scroll")}>
           <div class={cx(cardHeaderClass, "space-y-3")}>
             <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div class="flex min-w-0 items-center gap-3">
@@ -64,7 +70,7 @@ import { education } from "@/data/education";
                 rel="noreferrer noopener"
                 class={buttonClass({ size: "sm", variant: "outline", className: "rounded-full" })}
               >
-                Lihat Detail
+                {btnDetail}
               </a>
             ) : null}
           </div>

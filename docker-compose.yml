@@ -1,0 +1,9 @@
+services:
+  portofolio:
+    image: ghcr.io/pradanain/portofolio:latest
+    container_name: portofolio
+    restart: unless-stopped
+    ports:
+      - "3000:80"   
+    environment:
+      - SITE_URL=https://pradanain.id

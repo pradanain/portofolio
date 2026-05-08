@@ -2,7 +2,9 @@
 import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 import { buttonClass } from "@/lib/ui";
 
-const navItems = [
+const isEn = Astro.url.pathname.includes('/en');
+
+const navItemsId = [
   { label: "Beranda", href: "#beranda" },
   { label: "Keahlian", href: "#keahlian" },
   { label: "Proyek", href: "#proyek" },
@@ -14,6 +16,20 @@ const navItems = [
   { label: "Kontak", href: "#kontak" }
 ];
 
+const navItemsEn = [
+  { label: "Home", href: "#beranda" },
+  { label: "Skills", href: "#keahlian" },
+  { label: "Projects", href: "#proyek" },
+  { label: "Experience", href: "#pengalaman" },
+  { label: "Organizations", href: "#organisasi" },
+  { label: "Education", href: "#pendidikan" },
+  { label: "Trainings", href: "#pelatihan" },
+  { label: "Publications", href: "#publikasi-paten" },
+  { label: "Contact", href: "#kontak" }
+];
+
+const navItems = isEn ? navItemsEn : navItemsId;
+
 const sectionIds = navItems.map((item) => item.href.replace("#", ""));
 ---
 
@@ -24,6 +40,7 @@ const sectionIds = navItems.map((item) => item.href.replace("#", ""));
   data-scroll-offset="88"
 >
   <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
+  <div id="scroll-progress" class="absolute bottom-0 left-0 h-[2px] bg-primary w-0 transition-all duration-150 ease-out z-50"></div>
 
   <div class="container flex h-16 items-center gap-3">
     <a
@@ -44,6 +61,15 @@ const sectionIds = navItems.map((item) => item.href.replace("#", ""));
     </nav>
 
     <div class="ml-auto flex items-center gap-2">
+      <button
+        type="button"
+        id="lang-toggle"
+        class={buttonClass({ variant: "outline", size: "icon" })}
+        aria-label="Ganti Bahasa / Switch Language"
+        title="Switch Language"
+      >
+        <span class="text-[11px] font-bold tracking-wider" id="lang-text">ID</span>
+      </button>
       <ThemeToggle />
 
       <div class="lg:hidden">
@@ -142,6 +168,7 @@ const sectionIds = navItems.map((item) => item.href.replace("#", ""));
     min-height: 100%;
     padding: 1.5rem;
     background: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
   .nav-link {

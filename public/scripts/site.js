@@ -296,16 +296,178 @@
       var interval = Number(rotator.dataset.interval || "2500");
       var delay = Number.isFinite(interval) && interval > 0 ? interval : 2500;
       var index = 0;
+      var charIndex = 0;
+      var isDeleting = false;
+      var currentText = "";
+      
+      value.style.borderRight = "2px solid currentColor";
+      value.style.paddingRight = "4px";
+      
+      // Simple blink animation via JS
+      setInterval(function() {
+        value.style.borderColor = value.style.borderColor === "transparent" ? "currentColor" : "transparent";
+      }, 500);
 
-      window.setInterval(function () {
-        index = (index + 1) % roles.length;
-        value.classList.remove("role-swap");
-        void value.offsetWidth;
-        value.textContent = roles[index];
-        value.classList.add("role-swap");
-      }, delay);
+      function typeWriter() {
+        var fullText = roles[index];
+        
+        if (isDeleting) {
+          currentText = fullText.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          currentText = fullText.substring(0, charIndex + 1);
+          charIndex++;
+        }
+        
+        value.textContent = currentText;
+        
+        var typeSpeed = isDeleting ? 40 : 80;
+        
+        if (!isDeleting && currentText === fullText) {
+          typeSpeed = 2000; // Pause at end
+          isDeleting = true;
+        } else if (isDeleting && currentText === "") {
+          isDeleting = false;
+          index = (index + 1) % roles.length;
+          typeSpeed = 300; // Pause before new word
+        }
+        
+        setTimeout(typeWriter, typeSpeed);
+      }
+      
+      value.classList.remove("role-swap");
+      typeWriter();
 
       rotator.dataset.bound = "true";
+    });
+  }
+
+  function initScrollReveal() {
+    var reveals = document.querySelectorAll(".reveal-on-scroll");
+    if (!reveals.length || !("IntersectionObserver" in window)) {
+      reveals.forEach(function(el) { el.classList.add("is-revealed"); });
+      return;
+    }
+    
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    
+    reveals.forEach(function(el) { observer.observe(el); });
+  }
+
+  function initExpandableLists() {
+    var buttons = document.querySelectorAll("[data-expand-button]");
+    buttons.forEach(function(button) {
+      if (button.dataset.bound === "true") return;
+      button.dataset.bound = "true";
+      
+      button.addEventListener("click", function() {
+        var listId = button.dataset.expandButton;
+        var list = document.querySelector('[data-expandable-list="' + listId + '"]');
+        if (!list) return;
+        
+        var isExpanded = button.dataset.expanded === "true";
+        var items = list.querySelectorAll('[data-expandable-item="true"]');
+        
+        var svg = button.querySelector("svg");
+        var span = button.querySelector("span");
+        
+        if (isExpanded) {
+          items.forEach(function(item) {
+            item.classList.add("hidden");
+          });
+          button.dataset.expanded = "false";
+          if (svg) svg.style.transform = "rotate(0deg)";
+          if (span) {
+            span.textContent = span.dataset.originalText || (listId === "projects" ? "Lihat Semua Proyek" : "Lihat Selengkapnya");
+          }
+          
+          var section = list.closest("section");
+          if (section) {
+            var offset = Number(document.querySelector("[data-navbar]")?.dataset.scrollOffset || "88");
+            window.scrollTo({ top: section.offsetTop - offset, behavior: "smooth" });
+          }
+        } else {
+          items.forEach(function(item) {
+            item.classList.remove("hidden");
+          });
+          button.dataset.expanded = "true";
+          if (svg) svg.style.transform = "rotate(180deg)";
+          if (span) span.textContent = span.dataset.expandedText || "Sembunyikan";
+        }
+      });
+    });
+  }
+
+  function initScrollEffects() {
+    var progressBar = document.getElementById("scroll-progress");
+    var backToTop = document.getElementById("back-to-top");
+    
+    if (!progressBar && !backToTop) return;
+    
+    window.addEventListener("scroll", function() {
+      if (progressBar) {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + "%";
+      }
+      
+      if (backToTop) {
+        if (window.scrollY > 300) {
+          backToTop.classList.remove("opacity-0", "translate-y-4", "pointer-events-none");
+          backToTop.classList.add("opacity-100", "translate-y-0");
+        } else {
+          backToTop.classList.add("opacity-0", "translate-y-4", "pointer-events-none");
+          backToTop.classList.remove("opacity-100", "translate-y-0");
+        }
+      }
+    }, { passive: true });
+    
+    if (backToTop) {
+      backToTop.addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+  }
+
+  function initLangToggle() {
+    var toggleBtn = document.getElementById("lang-toggle");
+    var toggleText = document.getElementById("lang-text");
+    if (!toggleBtn || !toggleText) return;
+
+    // Detect actual current language from HTML lang attribute
+    var currentLang = document.documentElement.lang || "id";
+    var isEn = currentLang === "en";
+    
+    toggleText.textContent = isEn ? "EN" : "ID";
+    localStorage.setItem("lang", currentLang);
+
+    toggleBtn.addEventListener("click", function() {
+      var currentPath = window.location.pathname;
+      var newPath;
+      
+      if (isEn) {
+        // Switch to ID: remove /en
+        newPath = currentPath.replace(/\/en(\/|$)/, '/');
+        if (newPath === "") newPath = "/";
+      } else {
+        // Switch to EN: add /en
+        if (currentPath.endsWith('/')) {
+            newPath = currentPath + "en/";
+        } else {
+            newPath = currentPath + "/en/";
+        }
+      }
+      
+      localStorage.setItem("lang", isEn ? "id" : "en");
+      window.location.href = newPath;
     });
   }
 
@@ -314,6 +476,10 @@
     initNavbar();
     initServicesFilter();
     initRoleRotators();
+    initScrollReveal();
+    initExpandableLists();
+    initScrollEffects();
+    initLangToggle();
   }
 
   initTheme();

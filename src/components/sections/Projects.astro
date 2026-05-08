@@ -1,27 +1,56 @@
-﻿---
-import { featuredProjects, projects } from "@/data/projects";
+---
+import { featuredProjects as featuredProjectsId, projects as projectsId } from "@/data/projects";
+import { featuredProjects as featuredProjectsEn, projects as projectsEn } from "@/data/en/projects";
 import ProjectCard from "./ProjectCard.astro";
 
+const isEn = Astro.url.pathname.includes('/en');
+const featuredProjects = isEn ? featuredProjectsEn : featuredProjectsId;
+const projects = isEn ? projectsEn : projectsId;
 const allProjects = [...featuredProjects, ...projects];
+const sectionTitle = isEn ? "Projects" : "Proyek";
+const sectionDesc = isEn 
+  ? "A curated collection of projects I have worked on." 
+  : "Kumpulan proyek pilihan yang pernah saya kerjakan.";
+const btnViewAll = isEn ? "View All Projects" : "Lihat Semua Proyek";
 ---
 
 <section id="proyek" class="section">
-  <div aria-hidden="true" class="section-bg">
+  <div aria-hidden="true" class="section-bg [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)]">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.08),transparent_40%)]"></div>
   </div>
 
   <div class="container relative space-y-12">
     <div class="mx-auto max-w-2xl space-y-3 text-center">
-      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Proyek</h2>
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">{sectionTitle}</h2>
       <p class="text-base leading-relaxed text-muted-foreground md:text-lg">
-        Kumpulan proyek pilihan yang pernah saya kerjakan.
+        {sectionDesc}
       </p>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-2">
-      {allProjects.map((project) => (
-        <ProjectCard project={project} />
-      ))}
+    <div class="grid gap-6 md:grid-cols-2" data-expandable-list="projects">
+      {allProjects.map((project, idx) => {
+        const isHidden = idx >= 4;
+        return (
+          <div class={isHidden ? 'hidden' : ''} data-expandable-item={isHidden ? 'true' : 'false'}>
+            <ProjectCard project={project} />
+          </div>
+        );
+      })}
     </div>
+
+    {allProjects.length > 4 && (
+      <div class="mt-8 flex justify-center">
+        <button
+          type="button"
+          data-expand-button="projects"
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 bg-transparent px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-primary/10 hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+        >
+          <span data-original-text={btnViewAll} data-expanded-text={isEn ? "Show Less" : "Sembunyikan"}>{btnViewAll}</span>
+          <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 4 4 4-4"/>
+          </svg>
+        </button>
+      </div>
+    )}
   </div>
 </section>

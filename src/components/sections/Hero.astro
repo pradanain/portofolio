@@ -5,38 +5,58 @@ import { badgeClass, buttonClass } from "@/lib/ui";
 import profileImage from "@/assets/profile.webp";
 import { withBase } from "@/lib/withBase";
 
-const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Speaker"];
+const roles = [
+  "Software Developer",
+  "Data Engineer",
+  "IT Support",
+  "Public Speaker",
+];
+
+const isEn = Astro.url.pathname.includes('/en');
+const greeting = isEn ? "Hello, I am" : "Halo, saya";
+const description = isEn 
+  ? "I am a statistician who loves building digital solutions to support data-driven decision making. I have experience in developing web applications, creating automations, as well as processing and analyzing data. I also actively collaborate with statistical partners and conduct cross-agency training."
+  : "Saya seorang statistisi yang senang membangun solusi digital untuk mendukung pengambilan keputusan berbasis data. Saya berpengalaman mengembangkan aplikasi web, membuat otomatisasi, serta mengolah dan menganalisis data. Saya juga aktif berkolaborasi dengan mitra statistik dan melakukan pembinaan lintas instansi.";
+
+const btnContact = isEn ? "Contact Me" : "Hubungi Saya";
+const btnCv = isEn ? "Download CV" : "Unduh CV";
+const badgeDesc = isEn 
+  ? "Building digital solutions, information systems, and data-driven automation." 
+  : "Membangun solusi digital, sistem informasi, dan otomatisasi berbasis data.";
 ---
 
 <section id="beranda" class="section" aria-label="Hero">
   <div aria-hidden="true" class="section-bg">
+    <!-- Topography Pattern -->
+    <div class="absolute inset-0 bg-topography [mask-image:linear-gradient(to_bottom,white,transparent_80%)]"></div>
+    
+    <!-- Radial Gradients -->
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.12),transparent_48%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.08),transparent_42%)]"></div>
-    <div class="absolute inset-0 bg-linear-to-b from-background via-background/75 to-transparent"></div>
+    
+    <!-- Bottom Fade Out -->
+    <div class="absolute inset-0 bg-linear-to-b from-transparent via-background/60 to-background"></div>
   </div>
 
   <div class="container relative">
     <div class="grid items-center gap-12 md:grid-cols-[1.15fr_0.85fr]">
-      <div class="space-y-8 md:space-y-10">
-        <div class="flex flex-wrap items-center gap-3">
-          <span class={badgeClass({ variant: "outline", className: "w-fit" })}>
-            Available for collaboration
-          </span>
-          <span class="text-xs text-muted-foreground">Response time: 24-48h</span>
-        </div>
-
+      <div class="space-y-8 md:space-y-10 reveal-on-scroll">
         <header class="space-y-4">
-          <p class="text-sm uppercase tracking-[0.35em] text-muted-foreground">Halo, saya</p>
+          <p class="text-sm uppercase tracking-[0.35em] text-muted-foreground">
+            {greeting}
+          </p>
 
           <h1 class="text-4xl font-semibold tracking-tight md:text-6xl">
-            Novan<span class="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">ni Indi Pradana</span>
+            Novan<span
+              class="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent"
+              >ni Indi Pradana</span
+            >
           </h1>
 
-          <div class="max-w-xl space-y-3 text-base leading-relaxed text-muted-foreground md:text-lg">
+          <div
+            class="max-w-xl space-y-3 text-base leading-relaxed text-muted-foreground md:text-lg"
+          >
             <p>
-              Saya seorang statistisi yang senang membangun solusi digital untuk mendukung pengambilan keputusan
-              berbasis data. Saya berpengalaman mengembangkan aplikasi web, membuat otomatisasi, serta mengolah
-              dan menganalisis data. Saya juga aktif berkolaborasi dengan mitra statistik dan melakukan pembinaan
-              lintas instansi.
+              {description}
             </p>
           </div>
         </header>
@@ -54,10 +74,10 @@ const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Spea
             class={buttonClass({
               size: "lg",
               className:
-                "rounded-full bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:ring-primary/40"
+                "rounded-full bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:ring-primary/40",
             })}
           >
-            Hubungi Saya
+            {btnContact}
           </a>
 
           <a
@@ -71,21 +91,27 @@ const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Spea
               size: "lg",
               variant: "outline",
               className:
-                "rounded-full border-primary/40 text-foreground hover:border-primary hover:bg-primary/10 focus-visible:ring-primary/40"
+                "rounded-full border-primary/40 text-foreground hover:border-primary hover:bg-primary/10 focus-visible:ring-primary/40",
             })}
           >
-            Unduh CV
+            {btnCv}
           </a>
         </div>
       </div>
 
-      <div class="relative mx-auto w-full max-w-sm">
+      <div
+        class="relative mx-auto w-full max-w-sm reveal-on-scroll"
+        style="transition-delay: 200ms;"
+      >
         <div
           aria-hidden="true"
           class="absolute -inset-4 rounded-[2rem] bg-linear-to-br from-primary/15 via-transparent to-accent/15"
-        ></div>
+        >
+        </div>
 
-        <div class="relative overflow-hidden rounded-[28px] border border-border/60 bg-card p-4 shadow-sm text-center">
+        <div
+          class="relative overflow-hidden rounded-[28px] border border-border/60 bg-card p-4 shadow-sm text-center"
+        >
           <figure class="space-y-4">
             <Image
               src={profileImage}
@@ -99,16 +125,24 @@ const roles = ["Software Developer", "Data Engineer", "IT Support", "Public Spea
               fetchpriority="high"
             />
 
-            <figcaption class="rounded-2xl border border-border/60 bg-secondary/60 p-4">
-              <p class="text-sm font-medium text-foreground">
-                "I don't know what happened, but I know what I have to do."
+            <figcaption class="rounded-2xl border border-border/60 bg-secondary/60 p-4 flex flex-col items-center justify-center gap-2">
+              <div class="flex items-center gap-2 text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+                <span class="text-sm font-semibold text-foreground">Data & Tech Enthusiast</span>
+              </div>
+              <p class="text-center text-xs text-muted-foreground leading-relaxed">
+                {badgeDesc}
               </p>
-              <p class="mt-1 text-center text-xs text-muted-foreground">Sakata Gintoki from Gintama</p>
             </figcaption>
           </figure>
         </div>
 
-        <div class="pointer-events-none absolute -bottom-4 left-1/2 w-[92%] -translate-x-1/2 rounded-2xl border border-border/60 bg-background/95 p-3 text-center text-xs text-muted-foreground shadow-sm">
+        <div
+          class="pointer-events-none absolute -bottom-4 left-1/2 w-[92%] -translate-x-1/2 rounded-2xl border border-border/60 bg-background/95 p-3 text-center text-xs text-muted-foreground shadow-sm"
+        >
           <span class="text-foreground">Open to:</span> freelance / contract
         </div>
       </div>
