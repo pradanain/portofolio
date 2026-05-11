@@ -2,17 +2,26 @@
 import { Image } from "astro:assets";
 import {
   badgeClass,
+  bentoCardClass,
   cardClass,
   cardContentClass,
   cardHeaderClass,
   cardTitleClass,
   cx
 } from "@/lib/ui";
-import { experiences as experiencesId } from "@/data/experience";
-import { experiences as experiencesEn } from "@/data/en/experience";
 
-const isEn = Astro.url.pathname.includes('/en');
-const experiences = isEn ? experiencesEn : experiencesId;
+import { getLangFromUrl, getPortfolioData } from "@/lib/data";
+
+interface Props {
+  lang?: "id" | "en";
+}
+
+const lang = Astro.props.lang || getLangFromUrl(Astro.url);
+const isEn = lang === "en";
+const data = getPortfolioData(lang);
+
+
+const { experiences } = data;
 const sectionTitle = isEn ? "Experience" : "Pengalaman";
 const sectionDesc = isEn 
   ? "Professional roles and key contributions." 
@@ -32,13 +41,13 @@ const sectionDesc = isEn
       </p>
     </div>
 
-    <div class="space-y-6">
+    <div class="space-y-6 ml-1.5 sm:ml-0">
       {experiences.map((exp, idx) => (
         <div class="relative pl-8">
           <div aria-hidden="true" class="absolute bottom-0 left-3 top-0 w-px bg-border/80"></div>
           <div aria-hidden="true" class="absolute left-2.25 top-8 h-3 w-3 rounded-full bg-primary ring-4 ring-background"></div>
 
-          <article class={cardClass("group border-border/60 bg-card/70 transition-all duration-300 hover:-translate-y-2 hover:bg-card hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)] focus-within:ring-2 focus-within:ring-primary/40 reveal-on-scroll")}>
+          <article class={bentoCardClass()}>
             <div class={cx(cardHeaderClass, "space-y-3")}>
               <div class="flex flex-wrap items-start justify-between gap-3">
                 <div class="flex min-w-0 items-center gap-3">
@@ -55,7 +64,7 @@ const sectionDesc = isEn
                   </div>
 
                   <div class="min-w-0">
-                    <h3 class={cx(cardTitleClass, "truncate")}>{exp.company}</h3>
+                    <h3 class={cx(cardTitleClass, "line-clamp-2 sm:truncate")}>{exp.company}</h3>
 
                     <p class="mt-1 text-sm text-muted-foreground">
                       <span class="font-medium text-foreground">{exp.role}</span>

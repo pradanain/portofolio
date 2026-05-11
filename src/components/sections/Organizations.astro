@@ -2,17 +2,26 @@
 import { Image } from "astro:assets";
 import {
   badgeClass,
+  bentoCardClass,
   cardClass,
   cardContentClass,
   cardHeaderClass,
   cardTitleClass,
   cx
 } from "@/lib/ui";
-import { organizations as organizationsId } from "@/data/organizations";
-import { organizations as organizationsEn } from "@/data/en/organizations";
 
-const isEn = Astro.url.pathname.includes('/en');
-const organizations = isEn ? organizationsEn : organizationsId;
+import { getLangFromUrl, getPortfolioData } from "@/lib/data";
+
+interface Props {
+  lang?: "id" | "en";
+}
+
+const lang = Astro.props.lang || getLangFromUrl(Astro.url);
+const isEn = lang === "en";
+const data = getPortfolioData(lang);
+
+
+const { organizations } = data;
 const sectionTitle = isEn ? "Organizations" : "Organisasi";
 const sectionDesc = isEn 
   ? "Committee roles, communities, and social contributions." 
@@ -33,7 +42,7 @@ const btnViewAll = isEn ? "View All Organizations" : "Lihat Semua Organisasi";
       </p>
     </div>
 
-    <div class="space-y-6" data-expandable-list="organizations">
+    <div class="space-y-6 ml-1.5 sm:ml-0" data-expandable-list="organizations">
       {organizations.map((org, idx) => {
         const index = idx + 1;
         const isHidden = idx >= 3;
@@ -43,7 +52,7 @@ const btnViewAll = isEn ? "View All Organizations" : "Lihat Semua Organisasi";
             <div aria-hidden="true" class="absolute bottom-0 left-3 top-0 w-px bg-border/80"></div>
             <div aria-hidden="true" class="absolute left-2.25 top-8 h-3 w-3 rounded-full bg-primary ring-4 ring-background"></div>
 
-            <article class={cardClass("group border-border/60 bg-card/70 transition-all duration-300 hover:-translate-y-2 hover:bg-card hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)] focus-within:ring-2 focus-within:ring-primary/40 reveal-on-scroll")}>
+            <article class={bentoCardClass()}>
               <div class={cx(cardHeaderClass, "space-y-3")}>
                 <div class="flex flex-wrap items-start justify-between gap-3">
                   <div class="flex min-w-0 items-center gap-3">
@@ -60,7 +69,7 @@ const btnViewAll = isEn ? "View All Organizations" : "Lihat Semua Organisasi";
                     </div>
 
                     <div class="min-w-0">
-                      <h3 class={cx(cardTitleClass, "truncate")}>{org.organization}</h3>
+                      <h3 class={cx(cardTitleClass, "line-clamp-2 sm:truncate")}>{org.organization}</h3>
                       <p class="mt-1 text-sm text-muted-foreground">
                         <span class="font-medium text-foreground">{org.role}</span>
                       </p>

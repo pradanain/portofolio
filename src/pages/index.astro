@@ -3,13 +3,12 @@ import { getImage } from "astro:assets";
 import "../styles/global.css";
 import Navbar from "@/components/layout/Navbar.astro";
 import Hero from "@/components/sections/Hero.astro";
+import TechMarquee from "@/components/ui/TechMarquee.astro";
 import WhatIDo from "@/components/sections/WhatIDo.astro";
 import Projects from "@/components/sections/Projects.astro";
 import Experience from "@/components/sections/Experience.astro";
 import Organizations from "@/components/sections/Organizations.astro";
-import Education from "@/components/sections/Education.astro";
-import Trainings from "@/components/sections/Trainings.astro";
-import Publications from "@/components/sections/Publications.astro";
+import ProfileTabs from "@/components/sections/ProfileTabs.astro";
 import Contact from "@/components/sections/Contact.astro";
 import profileImage from "@/assets/profile.webp";
 import { withBase } from "@/lib/withBase";
@@ -102,7 +101,7 @@ const websiteSchema = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -138,13 +137,12 @@ const websiteSchema = {
 
     <main id="main">
       <Hero />
+      <TechMarquee />
       <WhatIDo />
       <Projects />
       <Experience />
       <Organizations />
-      <Education />
-      <Trainings />
-      <Publications />
+      <ProfileTabs />
       <Contact />
     </main>
 

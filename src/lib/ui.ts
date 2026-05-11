@@ -41,7 +41,7 @@ const BADGE_BASE =
 const BADGE_VARIANTS: Record<BadgeVariant, string> = {
   default: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
   secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-  outline: "border-border/60 bg-transparent text-foreground hover:bg-secondary/80"
+  outline: "border-border/80 dark:border-border/60 bg-transparent text-foreground hover:bg-secondary/80"
 };
 
 export function badgeClass({
@@ -56,7 +56,14 @@ export function badgeClass({
 
 export function cardClass(className?: string) {
   return cx(
-    "rounded-xl border border-border/60 bg-card text-card-foreground shadow-soft",
+    "rounded-xl border border-border/80 dark:border-border/60 bg-card text-card-foreground shadow-soft",
+    className
+  );
+}
+
+export function bentoCardClass(className?: string) {
+  return cx(
+    "bento-card group focus-within:ring-2 focus-within:ring-primary/40 reveal-on-scroll",
     className
   );
 }

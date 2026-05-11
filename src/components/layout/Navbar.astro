@@ -9,10 +9,7 @@ const navItemsId = [
   { label: "Keahlian", href: "#keahlian" },
   { label: "Proyek", href: "#proyek" },
   { label: "Pengalaman", href: "#pengalaman" },
-  { label: "Organisasi", href: "#organisasi" },
-  { label: "Pendidikan", href: "#pendidikan" },
-  { label: "Pelatihan", href: "#pelatihan" },
-  { label: "Publikasi & Paten", href: "#publikasi-paten" },
+  { label: "Profil", href: "#organisasi" },
   { label: "Kontak", href: "#kontak" }
 ];
 
@@ -21,10 +18,7 @@ const navItemsEn = [
   { label: "Skills", href: "#keahlian" },
   { label: "Projects", href: "#proyek" },
   { label: "Experience", href: "#pengalaman" },
-  { label: "Organizations", href: "#organisasi" },
-  { label: "Education", href: "#pendidikan" },
-  { label: "Trainings", href: "#pelatihan" },
-  { label: "Publications", href: "#publikasi-paten" },
+  { label: "Profile", href: "#organisasi" },
   { label: "Contact", href: "#kontak" }
 ];
 
@@ -34,7 +28,7 @@ const sectionIds = navItems.map((item) => item.href.replace("#", ""));
 ---
 
 <header
-  class="sticky top-0 z-40 w-full border-b border-border/60 bg-background/95"
+  class="sticky top-0 z-40 w-full border-b border-border/60 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 transition-colors duration-500 ease-in-out"
   data-navbar
   data-section-ids={JSON.stringify(sectionIds)}
   data-scroll-offset="88"
@@ -169,6 +163,7 @@ const sectionIds = navItems.map((item) => item.href.replace("#", ""));
     padding: 1.5rem;
     background: hsl(var(--background));
     color: hsl(var(--foreground));
+    transition: background-color 500ms ease-in-out, color 500ms ease-in-out;
   }
 
   .nav-link {

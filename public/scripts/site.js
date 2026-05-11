@@ -350,9 +350,13 @@
     }
     
     var observer = new IntersectionObserver(function(entries) {
+      var delay = 0;
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-revealed");
+          setTimeout(function() {
+            entry.target.classList.add("is-revealed");
+          }, delay);
+          delay += 100;
           observer.unobserve(entry.target);
         }
       });

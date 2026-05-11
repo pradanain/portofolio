@@ -1,11 +1,16 @@
 ---
-import { featuredProjects as featuredProjectsId, projects as projectsId } from "@/data/projects";
-import { featuredProjects as featuredProjectsEn, projects as projectsEn } from "@/data/en/projects";
 import ProjectCard from "./ProjectCard.astro";
+import { getLangFromUrl, getPortfolioData } from "@/lib/data";
 
-const isEn = Astro.url.pathname.includes('/en');
-const featuredProjects = isEn ? featuredProjectsEn : featuredProjectsId;
-const projects = isEn ? projectsEn : projectsId;
+interface Props {
+  lang?: "id" | "en";
+}
+
+const lang = Astro.props.lang || getLangFromUrl(Astro.url);
+const isEn = lang === "en";
+const data = getPortfolioData(lang);
+const { featuredProjects } = data;
+const { projects } = data;
 const allProjects = [...featuredProjects, ...projects];
 const sectionTitle = isEn ? "Projects" : "Proyek";
 const sectionDesc = isEn 
@@ -19,7 +24,7 @@ const btnViewAll = isEn ? "View All Projects" : "Lihat Semua Proyek";
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.08),transparent_40%)]"></div>
   </div>
 
-  <div class="container relative space-y-12">
+  <div class="container relative space-y-10">
     <div class="mx-auto max-w-2xl space-y-3 text-center">
       <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">{sectionTitle}</h2>
       <p class="text-base leading-relaxed text-muted-foreground md:text-lg">

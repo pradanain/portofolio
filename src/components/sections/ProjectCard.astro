@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import {
   badgeClass,
+  bentoCardClass,
   buttonClass,
   cardClass,
   cardContentClass,
@@ -22,9 +23,7 @@ const remainingStack = project.stack ? project.stack.length - visibleStack.lengt
 ---
 
 <article
-  class={cardClass(
-    "group h-full overflow-hidden border-border/60 bg-card/70 transition-all duration-300 hover:-translate-y-2 hover:bg-card hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)] focus-within:ring-2 focus-within:ring-primary/40 reveal-on-scroll"
-  )}
+  class={bentoCardClass("h-full")}
 >
   <div class={cx(cardHeaderClass, "space-y-3")}>
     <div class="min-w-0 space-y-1">

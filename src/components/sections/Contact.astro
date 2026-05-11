@@ -1,5 +1,9 @@
 ---
 import RoleSocialLinks from "@/components/ui/RoleSocialLinks.astro";
+import { getLangFromUrl } from "@/lib/data";
+
+const lang = Astro.props.lang || getLangFromUrl(Astro.url);
+const isEn = lang === "en";
 
 const contacts = [
   {
@@ -57,24 +61,22 @@ const contacts = [
   }
 ];
 
-const isEn = Astro.url.pathname.includes('/en');
+
 const sectionTitle = isEn ? "Contact" : "Kontak";
 const sectionDesc = isEn 
   ? "I usually respond within 1-2 business days." 
   : "Saya biasanya merespons dalam 1-2 hari kerja.";
 ---
 
-<section id="kontak" class="section pt-28 pb-20 md:pt-36 md:pb-28">
+<section id="kontak" class="section">
   <div aria-hidden="true" class="section-bg">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.08),transparent_40%)]"></div>
   </div>
 
   <div class="container">
-    <div class="mx-auto max-w-2xl text-center">
-      <h2 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-        {sectionTitle}
-      </h2>
-      <p class="mx-auto max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+    <div class="mx-auto max-w-2xl space-y-3 text-center">
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">{sectionTitle}</h2>
+      <p class="text-base leading-relaxed text-muted-foreground md:text-lg">
         {sectionDesc}
       </p>
     </div>

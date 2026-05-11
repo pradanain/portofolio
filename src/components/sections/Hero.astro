@@ -2,6 +2,16 @@
 import { Image } from "astro:assets";
 import RoleRotatorText from "@/components/ui/RoleRotatorText.astro";
 import { badgeClass, buttonClass } from "@/lib/ui";
+
+import { getLangFromUrl, getPortfolioData } from "@/lib/data";
+
+interface Props {
+  lang?: "id" | "en";
+}
+
+const lang = Astro.props.lang || getLangFromUrl(Astro.url);
+const isEn = lang === "en";
+const data = getPortfolioData(lang);
 import profileImage from "@/assets/profile.webp";
 import { withBase } from "@/lib/withBase";
 
@@ -12,7 +22,7 @@ const roles = [
   "Public Speaker",
 ];
 
-const isEn = Astro.url.pathname.includes('/en');
+
 const greeting = isEn ? "Hello, I am" : "Halo, saya";
 const description = isEn 
   ? "I am a statistician who loves building digital solutions to support data-driven decision making. I have experience in developing web applications, creating automations, as well as processing and analyzing data. I also actively collaborate with statistical partners and conduct cross-agency training."
@@ -46,9 +56,9 @@ const badgeDesc = isEn
           </p>
 
           <h1 class="text-4xl font-semibold tracking-tight md:text-6xl">
-            Novan<span
+            Novanni <span
               class="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent"
-              >ni Indi Pradana</span
+              >Indi Pradana</span
             >
           </h1>
 

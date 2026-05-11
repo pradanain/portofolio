@@ -19,8 +19,8 @@
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --border: 220 13% 89%;
+    --input: 220 13% 89%;
     --ring: 222 80% 55%;
     --radius: 18px;
   }
@@ -57,8 +57,8 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+    @apply bg-background text-foreground antialiased transition-colors duration-500 ease-in-out;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     background-image:
       radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 42%),
       radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.12), transparent 45%),
@@ -66,7 +66,7 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
   }
 
   .theme-icon-dark {
@@ -84,6 +84,26 @@
   img {
     display: block;
     max-width: 100%;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full border-[2px] border-solid border-background transition-colors;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+  
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
   }
 }
 
@@ -167,6 +187,29 @@
     display: inline-block;
     animation: roleSwap 0.45s ease;
     will-change: opacity, transform;
+  }
+
+  .bento-card {
+    @apply relative overflow-hidden rounded-2xl border border-border/80 dark:border-border/40 bg-card/40 backdrop-blur-md transition-all duration-500 ease-out;
+  }
+  
+  .bento-card:hover {
+    @apply -translate-y-1.5 bg-card/60 shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgba(255,255,255,0.05)];
+  }
+  
+  .bento-card::before {
+    content: "";
+    @apply absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/20 dark:ring-white/5 pointer-events-none;
+  }
+  
+  .bento-card::after {
+    content: "";
+    @apply absolute -inset-px rounded-[17px] bg-linear-to-br from-primary/30 via-transparent to-transparent opacity-0 transition-opacity duration-500 pointer-events-none;
+    z-index: 10;
+  }
+  
+  .bento-card:hover::after {
+    @apply opacity-100;
   }
 }
 

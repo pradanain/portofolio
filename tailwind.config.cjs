@@ -31,8 +31,8 @@ module.exports = {
         sm: "calc(var(--radius) - 6px)"
       },
       fontFamily: {
-        sans: ["\"Poppins\"", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["\"Poppins\"", "ui-sans-serif", "system-ui", "sans-serif"]
+        sans: ["\"Inter\"", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["\"Outfit\"", "ui-sans-serif", "system-ui", "sans-serif"]
       },
       boxShadow: {
         soft: "0 12px 40px -24px rgba(15, 23, 42, 0.6)",

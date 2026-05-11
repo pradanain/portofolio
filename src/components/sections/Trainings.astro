@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import {
   badgeClass,
+  bentoCardClass,
   buttonClass,
   cardClass,
   cardContentClass,
@@ -9,11 +10,19 @@ import {
   cardTitleClass,
   cx
 } from "@/lib/ui";
-import { trainings as trainingsId } from "@/data/trainings";
-import { trainings as trainingsEn } from "@/data/en/trainings";
 
-const isEn = Astro.url.pathname.includes('/en');
-const trainings = isEn ? trainingsEn : trainingsId;
+import { getLangFromUrl, getPortfolioData } from "@/lib/data";
+
+interface Props {
+  lang?: "id" | "en";
+}
+
+const lang = Astro.props.lang || getLangFromUrl(Astro.url);
+const isEn = lang === "en";
+const data = getPortfolioData(lang);
+
+
+const { trainings } = data;
 const sectionTitle = isEn ? "Trainings" : "Pelatihan";
 const btnCert = isEn ? "View Certificate" : "Lihat Sertifikat";
 ---
@@ -30,7 +39,7 @@ const btnCert = isEn ? "View Certificate" : "Lihat Sertifikat";
 
     <div class="grid gap-6 md:grid-cols-2">
       {trainings.map((training) => (
-        <article class={cardClass("group h-full border-border/60 bg-card/70 transition-all duration-300 hover:-translate-y-2 hover:bg-card hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)] focus-within:ring-2 focus-within:ring-primary/40 reveal-on-scroll")}>
+        <article class={bentoCardClass("h-full")}>
           <div class={cx(cardHeaderClass, "space-y-3")}>
             <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div class="flex min-w-0 items-center gap-3">
